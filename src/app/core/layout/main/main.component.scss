@@ -1,0 +1,44 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+button {
+  margin: 0 10px;
+  &.active {
+      filter: brightness(120%);
+  }
+}
+.rotate-90{
+  transform: rotate(90deg);
+}
+
+.mg-5{
+  margin: 10px;
+}
+
+.f-small
+{
+  font-size: 10px;
+}
+
+.f-verysmall{
+  font-size: 8px;
+}
+
+.floatr
+{
+  float: right;
+}
+mat-sidenav-container{
+  height:100% !important;
+  width: 100% !important;
+}
+
+.color_green
+{
+  background-color: lime;
+}
+.h90 {
+  min-height: 89vh;
+}
+

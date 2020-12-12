@@ -1,0 +1,153 @@
+
+
+<mat-sidenav-container fxFlexFill autosize>
+  <mat-sidenav #sidenav [mode]="mode" [opened]="isAuth" (mouseenter) ="showDetail()" style="background-color:#F5F5F5;" (mouseleave)="closeDetail()" >
+              <div  fxLayout="row" fxLayoutAlign="space-around center" style="background-color : #F5F5F5;color :#000000;padding: 7px;">
+                      <img src="../assets/img/logo-sm.png" alt="sa"/>
+
+                      <em  *ngIf="showDetails" > SUIVI</em>
+                      <span class="spacer"></span>
+                      <button *ngIf="showDetails" mat-icon-button (click)="fixeSideNav()" fxShow="true">
+                          <mat-icon [ngClass]="{'rotate-90':fixDetails}">menu</mat-icon>
+                      </button>
+              </div>
+          <!-- navbar -->
+          <mat-nav-list>
+              <small *ngIf="showDetails" class="mg-5 f-small">
+                      Seydina Mouhamed Basse
+              </small>
+              <div *ngIf="showDetails" class="mg-5 f-verysmall">
+                      seydibasse@gmail.com
+              </div>
+              <div>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      dashboard
+                              </mat-icon>
+                              <small *ngIf="showDetails">Dashboard</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      assignment
+                              </mat-icon>
+                              <small *ngIf="showDetails">Briefs</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      person
+                              </mat-icon>
+                              <small *ngIf="showDetails">Utilisateurs</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      people
+                              </mat-icon>
+                              <small *ngIf="showDetails">Groupes</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      ballot
+                              </mat-icon>
+                              <small *ngIf="showDetails">Compétences</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      layers
+                              </mat-icon>
+                              <small *ngIf="showDetails">Référentiels</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      account_box
+                              </mat-icon>
+                              <small *ngIf="showDetails">Promos</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      school
+                              </mat-icon>
+                              <small *ngIf="showDetails">Profil Sortie</small>
+                      </a>
+
+                      <a mat-list-item>
+                              <mat-icon>
+                                      local_offer
+                              </mat-icon>
+                              <small *ngIf="showDetails">Tags</small>
+                      </a>
+                      <a mat-list-item>
+                              <mat-icon>
+                                      settings
+                              </mat-icon>
+                              <small *ngIf="showDetails">Paramètres</small>
+                      </a>
+
+              </div>
+              <div>
+                      <a  mat-list-item>
+                              <mat-icon >
+                                      account_box
+                              </mat-icon>
+                              <small *ngIf="showDetails">Se connecter</small>
+                      </a>
+              </div>
+              <a mat-list-item>
+                      <mat-icon>
+                              notifications
+                      </mat-icon>
+                      <small *ngIf="showDetails">Notifications</small>
+              </a>
+              <a mat-list-item>
+                      <mat-icon>message</mat-icon>
+                      <small *ngIf="showDetails"> Message </small>
+              </a>
+              <a (click)="sidenav.toggle()" mat-list-item>
+                      <mat-icon>close</mat-icon>
+                      <small *ngIf="showDetails"> Close </small>
+              </a>
+          </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav position="end" mode="side" #message>
+              <div class="floatr mat-elevation-z2 " >
+                              Les messages seront ici
+              </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content autosize>
+      <!-- toolbar -->
+      <mat-toolbar *ngIf="isAuth" style="z-index: 1000; min-height: 40px !important; height: 30px !important;background-color : #F5F5F5;color :#000000" class="sticky" color="primary" class="mat-elevation-z4 topo" [style.margin-bottom]="'4px'">
+          <mat-toolbar-row >
+              <button mat-icon-button (click)="sidenav.toggle()" fxShow="true">
+                          <mat-icon>menu</mat-icon>
+                  </button>
+                  <a routerLink="/" mat-button><mat-icon>home</mat-icon></a>
+                  <span class="spacer"></span>
+                  <div >
+                              <a href="#" mat-button> <mat-icon>notifications</mat-icon><small fxShow="true" fxHide.lt-md="true"> Notifications </small> </a>
+                              <a [matMenuTriggerFor]="authMenu" mat-button>
+                                  <mat-icon>account_box</mat-icon><small fxShow="true" fxHide.lt-md="true">  Mon Compte </small>
+                                  <mat-icon>expand_more </mat-icon>
+                              </a>
+                              <mat-menu #authMenu="matMenu" xPosition="before">
+                                <button routerLink="/auth/login" mat-menu-item>Profil</button>
+                                <button mat-menu-item (click)="logout()">&nbsp;&nbsp;&nbsp;&nbsp;Déconnexion&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                              </mat-menu>
+                              <a  mat-button>
+                                  <mat-icon (click)="message.toggle()">message</mat-icon>
+                              </a>
+                  </div>
+          </mat-toolbar-row>
+      </mat-toolbar>
+              <div class="float color_green h90" >
+                      <div class="float">
+                      <router-outlet></router-outlet>
+
+                      </div>
+              </div>
+  </mat-sidenav-content>
+
+
+</mat-sidenav-container>
+

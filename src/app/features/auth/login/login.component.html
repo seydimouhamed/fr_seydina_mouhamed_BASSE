@@ -1,0 +1,32 @@
+<ng-container fxFill fxLayoutAlign="center center" >
+<mat-card>
+  <mat-card-title ><h1> Se Connecter </h1> </mat-card-title >
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <p>
+              <mat-form-field appearance="outline">
+                  <mat-label>Nom utilisateur</mat-label>
+                  <input matInput  [ngClass]="{'is-invalid': submitted && f.username.errors }" type="text" formControlName="username">
+                  <mat-icon matSuffix>account_circle</mat-icon>
+                  <mat-hint *ngIf="submitted && f.username.errors">
+                          <div *ngIf="f.username.errors.required">Veuiller entrer un nom utilisateur </div>
+                  </mat-hint>
+              </mat-form-field>
+              </p>
+
+              <p>
+                  <mat-form-field appearance="outline">
+                      <mat-label>Mot de passe</mat-label>
+                      <input matInput  [ngClass]="{'is-invalid': submitted && f.password.errors }" [type]="hide ? 'password' : 'text'" formControlName="password"/>
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-hint *ngIf="submitted && f.password.errors">
+                              <div *ngIf="f.password.errors.required">Veuiller entrer le mot de passe </div>
+                      </mat-hint>
+                  </mat-form-field>
+              </p>
+
+          <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Connexion <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+      </form>
+</mat-card>
+</ng-container>
