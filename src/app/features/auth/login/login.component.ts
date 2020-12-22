@@ -1,10 +1,11 @@
 import { User } from './../../../models/User';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder,  FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, first } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { TestService } from './test.service';
+import { LowerCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +29,12 @@ constructor(
    private testServie: TestService
 ){
     if (this.authService.currentUserValue){
+      const role = this.authService.getCurrentUserTokenInfo()['roles'][0];
 
-      this.router.navigate(['/admin']);
+      const rout = (role.split('_')[1]).toLowerCase();
+
+     // alert(rout);
+      this.router.navigate(['/' + rout]);
 
     }
 }
@@ -72,20 +77,9 @@ constructor(
       pipe(first()).
          subscribe(
            user => {
-             console.log(user);
-             const role = user.profil.libelle;
-             if ( role === 'ADMIN') {
-               console.log('page admin redirection');
-               this.returnUrl = '/admin';
-             }else if ( role  === 'FORMATEUR') {
-               this.returnUrl = '/formateur';
-             }else if ( role === 'APPRENANT') {
-               this.returnUrl = '/apprenant';
-             }
-             else {
-               console.log('autre page redirection');
-             }
-             this.router.navigate([this.returnUrl]);
+             this.authService.setCurrentUserValue(user);
+             const role = (user.profil.libelle).toLowerCase();
+             this.router.navigate(['/' + role]);
            }
          );
     }

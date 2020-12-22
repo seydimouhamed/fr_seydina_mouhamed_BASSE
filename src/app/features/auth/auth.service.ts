@@ -13,6 +13,7 @@ export class AuthService{
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   tokenInfo: any;
+  private currentRole = '';
 
   apiUrl = environment.apiUrl;
   // ------JwtHelperService------ //
@@ -29,11 +30,19 @@ export class AuthService{
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
-
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
+   getCurrentRole(): string
+   {
+     const role = this.getTokenfromLocal()['role'];
+     return ((role.split('_'))[1]).toLowerCase();
+   }
+   getTokenfromLocal(): any
+   {
+     return JSON.parse(localStorage.getItem('currentUser'));
+   }
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
@@ -42,14 +51,26 @@ export class AuthService{
     return this.http.post<any>(`${this.apiUrl}login`, { username, password })
             .pipe(map(token => {
               localStorage.setItem('currentUser', JSON.stringify(token));
+              localStorage.setItem('refreshToken', token.refresh_token);
               this.tokenInfo = this.getInfoToken(token.token);
               localStorage.setItem('currentUserInfo', JSON.stringify(this.tokenInfo));
-              //console.log(this.getTokenExpiratinDate());
-             // this.getCurrent();
+
+              // console.log(this.getTokenExpiratinDate());
               this.currentUserSubject.next(token);
+              this.startRefreshTokenTimer();
+             // this.refreshToken().subscribe();
               return true;
             })
     );
+  }
+
+  public getCurrentUserTokenInfo(): any{
+   return JSON.parse(localStorage.getItem('currentUserInfo'));
+  }
+
+  public setCurrentUserValue(user: User): void{
+    user.token = this.currentUserValue.token;
+    this.currentUserSubject.next(user);
   }
 
   logout(): boolean{
@@ -93,15 +114,21 @@ export class AuthService{
   }
 
   refreshToken(): any {
-
-      return this.http.post<any>(`${environment.apiUrl}/token/refresh`,
-      { refresh_token: this.currentUserValue.token }, { withCredentials: true })
+      const refreshToken = JSON.parse(localStorage.getItem('currentUser'))['refresh_token'];
+     // alert(refreshToken);
+      return this.http.post<any>(`${environment.apiUrl}token/refresh`,
+      { 'refresh_token': refreshToken })
           .pipe(map((user) => {
-              this.currentUserSubject.next(user);
-              this.startRefreshTokenTimer();
-              return user;
+            // alert('retour serveur')
+            // console.log(user['token']);
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserValue.token = user['token'];
+              // this.currentUserSubject.next(user);
+            this.startRefreshTokenTimer();
+            return user;
           }));
   }
+
   private startRefreshTokenTimer(): void {
       // parse json object from base64 encoded jwt token
       const jwtToken = JSON.parse(atob(this.currentUserValue.token.split('.')[1]));
@@ -109,6 +136,7 @@ export class AuthService{
       // set a timeout to refresh the token a minute before it expires
       const expires = new Date(jwtToken.exp * 1000);
       const timeout = expires.getTime() - Date.now() - (60 * 1000);
+     // const timeout = expires.getTime() - Date.now() - (60 * 1000);
       this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
   }
 

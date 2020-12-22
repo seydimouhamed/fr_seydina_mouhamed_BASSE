@@ -19,10 +19,10 @@ export class TestService {
   login(username: string, password: string): any{
 
 
-return this.http.post<any>(`${this.baseUrl}/login`, {username,password})
+return this.http.post<any>(`${this.baseUrl}/login`, {username, password})
    .pipe(map(token => {
 
-      localStorage.setItem('token',JSON.stringify(token));
+      localStorage.setItem('token', JSON.stringify(token));
 
     return 'revenu du  serveur';
 })

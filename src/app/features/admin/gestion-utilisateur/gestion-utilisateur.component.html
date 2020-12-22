@@ -1,0 +1,21 @@
+<div *ngIf="displayUsers">
+  <div>
+    <button mat-raised-button (click)="displayUsers=!displayUsers" class="">ADD<mat-icon>add</mat-icon></button>
+  </div>
+    <div fxLayout="row"  fxLayoutGap="gappx" fxFlexFill autosize>
+        <app-list-profil fxFlex="20">v</app-list-profil>
+        <app-list-user fxFlex="74" fxFlexFill autosize>a</app-list-user>
+    </div>
+</div>
+<div *ngIf="!displayUsers" >
+  <br>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx" class="mat-elevation-z8" >
+    <button mat-raised-button (click)="displayUsers=!displayUsers" ><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <h2>Ajouter un nouveau utilisateur</h2>
+    <h2>&nbsp;</h2>
+  </div>
+  <br><br>
+  <div class="w_70" fxLayoutAlign="center center"  class="mat-elevation-z8" >
+       <app-create-user fxFill></app-create-user>
+  </div>
+</div>

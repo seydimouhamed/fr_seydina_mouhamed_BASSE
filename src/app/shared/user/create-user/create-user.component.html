@@ -1,0 +1,66 @@
+<ng-container fxFill fxLayoutAlign="center center" class="red">
+  <mat-card class="green form">
+    <mat-card-title ><h1> Enregistrer un utilisateur</h1> </mat-card-title >
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+          <p>
+            <mat-form-field appearance="outline" class="w_50">
+              <mat-label>Email </mat-label>
+              <input matInput  [ngClass]="{'is-invalid': submitted && f.email.errors }" type="text" formControlName="email">
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-hint *ngIf="submitted && f.email.errors">
+                <div *ngIf="f.email.errors.required">Veuiller entrer une adresse email </div>
+                <div *ngIf="f.email.errors.email">Veuiller entrer une adresse email valide </div>
+              </mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w_50">
+              <mat-label>Nom utilisateur </mat-label>
+              <input matInput  [ngClass]="{'is-invalid': submitted && f.usernme.errors }" type="text" formControlName="usernme">
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-hint *ngIf="submitted && f.usernme.errors">
+                <div *ngIf="f.usernme.errors.required">Veuiller entrer un nom utilisateur</div>
+              </mat-hint>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w_50">
+                <mat-label>Prenom</mat-label>
+                <input matInput  [ngClass]="{'is-invalid': submitted && f.firstname.errors }" type="text" formControlName="firstname">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-hint *ngIf="submitted && f.firstname.errors">
+                        <div *ngIf="f.firstname.errors.required">Veuiller entrer le prénom </div>
+                </mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w_50">
+                <mat-label>Nom</mat-label>
+                <input matInput  [ngClass]="{'is-invalid': submitted && f.lastname.errors }" type="text" formControlName="lastname">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-hint *ngIf="submitted && f.lastname.errors">
+                        <div *ngIf="f.lastname.errors.required">Veuiller entrer le nom </div>
+                </mat-hint>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Profil</mat-label>
+              <mat-select formControlName="idProfil" placeholder="">
+                <mat-option [value]="1">Admin</mat-option>
+                <mat-option [value]="2">Formateur</mat-option>
+                <mat-option [value]="3">CM</mat-option>
+              </mat-select>
+              <mat-hint *ngIf="submitted && f.idProfil.errors">
+                      <div *ngIf="f.idProfil.errors.required">Veuillez slectionner un profil </div>
+              </mat-hint>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w_50">
+              <ngx-mat-file-input formControlName="avatar">
+              </ngx-mat-file-input>
+              <mat-hint>Hint</mat-hint>
+            </mat-form-field>
+          </p>
+
+            <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+        </form>
+  </mat-card>
+  </ng-container>

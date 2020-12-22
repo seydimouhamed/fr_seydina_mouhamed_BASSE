@@ -1,3 +1,5 @@
+import { UserModule } from './../../shared/user/user.module';
+import { MaterialModule } from './../../material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +11,9 @@ import { FormateurComponent } from './formateur.component';
   declarations: [FormateurComponent],
   imports: [
     CommonModule,
-    FormateurRoutingModule
+    FormateurRoutingModule,
+    MaterialModule,
+    UserModule
   ]
 })
 export class FormateurModule { }

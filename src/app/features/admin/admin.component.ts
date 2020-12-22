@@ -8,8 +8,10 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+currentProfil = '';
+  constructor(private authService: AuthService) {
 
-  constructor(private authService: AuthService) { }
+   }
 
   ngOnInit(): void {
   }

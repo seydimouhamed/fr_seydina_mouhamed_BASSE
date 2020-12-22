@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
   showDetails = false;
   fixDetails = false;
   isAuth = false;
+  currentProfil = '';
     constructor(private authService: AuthService, private router: Router) {
 
       this.authService.currentUser.subscribe(
@@ -27,6 +28,7 @@ export class MainComponent implements OnInit {
           }else
           {
             this.isAuth = true;
+            this.currentProfil = this.authService.getCurrentRole();
           }
         }
       );
@@ -47,11 +49,11 @@ export class MainComponent implements OnInit {
     fixeSideNav(): void{
       this.fixDetails = !this.fixDetails;
     }
-logout(): void
-{
-    if (this.authService.logout() )
+    logout(): void
     {
-      this.router.navigate(['/auth']);
+        if (this.authService.logout() )
+        {
+          this.router.navigate(['/auth']);
+        }
     }
-}
 }

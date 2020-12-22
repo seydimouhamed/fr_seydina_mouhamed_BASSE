@@ -6,10 +6,11 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 @NgModule({
-  declarations: [AuthComponent, LoginComponent],
+  declarations: [AuthComponent, LoginComponent, UpdatePasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

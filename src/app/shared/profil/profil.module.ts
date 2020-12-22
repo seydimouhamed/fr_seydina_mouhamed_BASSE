@@ -1,3 +1,4 @@
+import { MaterialModule } from 'src/app/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListProfilComponent } from './list-profil/list-profil.component';
@@ -8,7 +9,8 @@ import { CreatetProfilComponent } from './createt-profil/createt-profil.componen
 @NgModule({
   declarations: [ListProfilComponent, CreatetProfilComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ],
   exports: [ListProfilComponent, CreatetProfilComponent]
 })

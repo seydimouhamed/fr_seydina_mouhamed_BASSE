@@ -20,23 +20,23 @@
                       seydibasse@gmail.com
               </div>
               <div>
-                      <a mat-list-item>
+                      <a mat-list-item [routerLink]= "currentProfil + '/dashboard'"  routerLinkActive='active'>
                               <mat-icon>
                                       dashboard
                               </mat-icon>
                               <small *ngIf="showDetails">Dashboard</small>
+                      </a>
+                      <a mat-list-item  [routerLink]= "currentProfil + '/user'"  routerLinkActive='active'>
+                              <mat-icon>
+                                      person
+                              </mat-icon>
+                              <small *ngIf="showDetails">Utilisateurs</small>
                       </a>
                       <a mat-list-item>
                               <mat-icon>
                                       assignment
                               </mat-icon>
                               <small *ngIf="showDetails">Briefs</small>
-                      </a>
-                      <a mat-list-item>
-                              <mat-icon>
-                                      person
-                              </mat-icon>
-                              <small *ngIf="showDetails">Utilisateurs</small>
                       </a>
                       <a mat-list-item>
                               <mat-icon>
@@ -131,8 +131,8 @@
                                   <mat-icon>expand_more </mat-icon>
                               </a>
                               <mat-menu #authMenu="matMenu" xPosition="before">
-                                <button routerLink="/auth/login" mat-menu-item>Profil</button>
-                                <button mat-menu-item (click)="logout()">&nbsp;&nbsp;&nbsp;&nbsp;Déconnexion&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                <button routerLink="/auth/login" mat-menu-item><mat-icon>perm_identity</mat-icon>Profil</button>
+                                <button mat-menu-item (click)="logout()"><mat-icon>launch</mat-icon>Déconnexion&nbsp;&nbsp;</button>
                               </mat-menu>
                               <a  mat-button>
                                   <mat-icon (click)="message.toggle()">message</mat-icon>
