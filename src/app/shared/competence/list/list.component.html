@@ -1,0 +1,36 @@
+<br>
+<div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
+  <a mat-raised-button routerLink= './../add' class="">ADD NEW<mat-icon>add</mat-icon></a>
+</div>
+<br>
+<div class="center"> <h2 > Liste des compétences</h2></div>
+<div fxLayout="row"  fxLayoutAlign="space-around start" fxFlexFill fxLayoutGap="15px" autosize >
+    <div fxFlex="33" fxLayout="column"fxLayoutGap="5px" class="mgl-5">
+      <button mat-raised-button *ngFor="let c of competences" (click)="selectCompetence(c)"><h4>{{c.libelle}}</h4></button>
+      <mat-paginator [length]="nbrItem"
+                    [pageSize]="nbrItemPage"
+                    [pageSizeOptions]="[2, 4, 5, 10]" (page)="pager($event)">
+      </mat-paginator>
+    </div>
+    <div fxFlex="66">
+      <mat-tab-group *ngIf="currentCompetence" fxFlex="100">
+        <mat-tab  *ngFor="let niveau of currentCompetence.niveaux, let i= index" [label]="'Niveau '+ (i+1)+'     '">
+          <div>
+            <div fxFlex="50"><h2>Critère d'évaluation</h2>
+                 <div>{{ niveau.critereEvaluation }}</div>
+            </div>
+
+            <div fxFlex="50"><h2>Groupes d'actions</h2>
+                 <div>{{ niveau.groupeAction }}</div>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="Niveau 2"> Content 2 </mat-tab>
+        <mat-tab label="NIveau 3"> Content 3 </mat-tab> -->
+      </mat-tab-group>
+
+      <div *ngIf="!currentCompetence" fxFill>
+        <h3> Pas de competence selectionnée </h3>
+      </div>
+    </div>
+</div>

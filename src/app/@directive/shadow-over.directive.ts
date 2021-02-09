@@ -10,14 +10,15 @@ export class ShadowOverDirective {
    // renderer.addClass( el.nativeElement, 'mat-elevation-z8');
   }
   @HostListener('mouseenter') onMouseEnter(): void {
-    this.el.nativeElement.style.backgroundColor = 'yellow';
+    this.el.nativeElement.style.backgroundColor = ' #338F83';
+    this.el.nativeElement.style.color = ' #fff';
     this.renderer.addClass( this.el.nativeElement, 'mat-elevation-z8');
 
   }
   @HostListener('mouseleave') onMouseLeave(): void {
     this.el.nativeElement.style.backgroundColor = null;
-    this.el.nativeElement.classList.add('mat-elevation-Z8');
-    // this.renderer.addClass( this.el.nativeElement, 'mat-elevation-z8');
+    // this.el.nativeElement.classList.remove('mat-elevation-Z8');
+    this.renderer.removeClass( this.el.nativeElement, 'mat-elevation-z8');
 
   }
 }

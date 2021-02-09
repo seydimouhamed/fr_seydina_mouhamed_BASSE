@@ -1,0 +1,139 @@
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+  <a mat-raised-button routerLink= './../list' class=""  class="primary" ><mat-icon>keyboard_arrow_left</mat-icon></a>
+</div>
+<br>
+<div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
+  <mat-card class="green form" >
+    <mat-card-title  align="center"><h1> Nouvelle Promotion/Cohorte</h1> </mat-card-title >
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper >
+  <mat-step>
+    <ng-template  matStepLabel>Détails promo</ng-template>
+    <!-- <mat-step [stepControl]="firstFormGroup"> -->
+      <form [formGroup]="form" >
+
+        <p>
+          <mat-form-field appearance="outline" class="w_50">
+            <mat-label>Langue</mat-label>
+            <mat-select formControlName="langue" placeholder="">
+              <mat-option [value]="'francais'">Français</mat-option>
+              <mat-option [value]="'anglais'">Anglais</mat-option>
+              <mat-option [value]="'wolof'">Wolof</mat-option>
+              <mat-option [value]="'pular'">Pular</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="submitted && f.langue.errors">
+                    <div *ngIf="f.langue.errors.required">Veuillez selectionner une langue </div>
+            </mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w_50">
+            <mat-label>Fabrique</mat-label>
+            <mat-select formControlName="fabrique" placeholder="">
+              <mat-option [value]="'simplon'">Simplon</mat-option>
+              <mat-option [value]="'ODC'">ODC</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="submitted && f.fabrique.errors">
+                    <div *ngIf="f.fabrique.errors.required">Veuillez selectionner une fabrique </div>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="w_100">
+            <mat-label>Titre </mat-label>
+            <input matInput  [ngClass]="{'is-invalid': submitted && f.titre.errors }" type="text" formControlName="titre">
+            <mat-hint *ngIf="submitted && f.titre.errors">
+              <div *ngIf="f.titre.errors.required">Veuiller entrer un titre </div>
+            </mat-hint>
+          </mat-form-field>
+
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="w_100">
+            <mat-label>Description de la promotion</mat-label>
+            <textarea matInput  [ngClass]="{'is-invalid': submitted && f.description.errors }" type="text" formControlName="description"></textarea>
+            <mat-hint *ngIf="submitted && f.description.errors">
+              <div *ngIf="f.description.errors.required">Veuiller entrer une description</div>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="w_100">
+            <mat-label>Lieu de la promo </mat-label>
+            <input matInput  [ngClass]="{'is-invalid': submitted && f.lieu.errors }" type="text" formControlName="lieu">
+            <mat-hint *ngIf="submitted && f.lieu.errors">
+              <div *ngIf="f.lieu.errors.required">Veuiller entrer le lieu de la promo </div>
+            </mat-hint>
+          </mat-form-field>
+
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="w_50">
+            <mat-label>Date début</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName='dateDebut'>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 color="primary"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w_50">
+            <mat-label>Date fin</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName='dateFinPro'>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+          </mat-form-field>
+        </p>
+        <p>
+
+          <mat-form-field appearance="outline" class="w_100">
+            <mat-label>Référentiel</mat-label>
+            <mat-select formControlName="referentiel" placeholder="">
+              <mat-option *ngFor="let ref of referentiels"[value]="'/api/admin/referentiels/'+ref.id">{{ ref.libelle}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="submitted && f.referentiel.errors">
+                    <div *ngIf="f.referentiel.errors.required">Veuillez selectionner une référentiel </div>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+
+        <div class="zoneimage"  >
+          <input type="file" id="avatar" formControlName='avatar' name="avatar" class="avatar" (change)="onFileSelect($event)"/>
+          <div class="image_upload"fxLayout="column"  fxLayoutAlign="center center" >
+            <mat-icon>save_alt</mat-icon>
+            <div>
+                  glisser déposer un fichier
+            </div>
+            Ou
+            <label for="avatar" mat-button class="btn">Chosir un fichier</label>
+            <div fxLayout="row" *ngIf="avatar" fxLayoutAlign="center center" >
+              <mat-icon>insert_photo</mat-icon>{{avatar}}
+            </div>
+
+        <!-- <div  class="files-list" *ngFor="let file of files;let i= index">
+          <p> {{ file }} </p>
+          <button class="delete-file" (click)="deleteAttachment(i)">
+            <mat-icon class="mat-18">delete_outline</mat-icon>
+          </button>
+        </div> -->
+          </div>
+        </div>
+        <br>
+        <div fxLayout="row"  fxLayoutAlign="center center">
+          <button mat-raised-button class="primary" ><mat-icon >edit</mat-icon>Sauvegarder</button>&nbsp;&nbsp;
+          <button mat-raised-button class="primary" matStepperNext>Ajouter des Apprenants à la promo<mat-icon >last_page</mat-icon></button>
+        </div>
+       <!-- <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button> -->
+      </form>
+  </mat-step>
+  <mat-step  label="Ajouter des apprenants a la promo">
+  <!-- <mat-step [stepControl]="secondFormGroup" label="Fill out your address"> -->
+    <app-apprenantpromo (submitEvent)="onSubmit($event)" ></app-apprenantpromo>
+  </mat-step>
+  <!-- <mat-step>
+    <ng-template matStepLabel>Visualisation</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step> -->
+</mat-horizontal-stepper>
+  </mat-card>
+</div>

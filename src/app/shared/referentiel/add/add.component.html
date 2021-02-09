@@ -1,0 +1,141 @@
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+  <a mat-raised-button routerLink= './../' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
+</div>
+<br>
+<div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
+  <mat-card class="green form" >
+    <mat-card-title ><h1> Ajouter un Referentiel</h1> </mat-card-title >
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Libelle </mat-label>
+              <input matInput  [ngClass]="{'is-invalid': submitted && f.libelle.errors }" type="text" formControlName="libelle">
+              <mat-hint *ngIf="submitted && f.libelle.errors">
+                <div *ngIf="f.libelle.errors.required">Veuiller entrer un libelle </div>
+              </mat-hint>
+            </mat-form-field>
+
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Présentation </mat-label>
+              <textarea matInput  [ngClass]="{'is-invalid': submitted && f.presentation.errors }" type="text" formControlName="presentation"></textarea>
+              <mat-hint *ngIf="submitted && f.presentation.errors">
+                <div *ngIf="f.presentation.errors.required">Veuiller entrer une présentation</div>
+              </mat-hint>
+            </mat-form-field>
+          </p>
+          <p>
+            <app-dnd (fileDropped)="onFileSelect($event)"></app-dnd>
+          </p>
+
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Critère d'admission</mat-label>
+              <mat-chip-list #chipListCA aria-label="critereadmission selection">
+                <mat-chip
+                  *ngFor="let critereAdmission of critereadmissions"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="removeCA(critereAdmission)">
+                  {{critereAdmission}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="ajout Critère admission..."
+                  #grpCompetenceInput
+                  [formControl]="critereadmissionCtrl"
+                  [matChipInputFor]="chipListCA"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addCA($event)">
+              </mat-chip-list>
+              <!-- <mat-label>Critère d'admission </mat-label>
+              <textarea matInput  [ngClass]="{'is-invalid': submitted && f.critereadmission.errors }" type="text" formControlName="critereadmission"></textarea> -->
+              <mat-hint *ngIf="submitted && f.critereAdmission.errors">
+                <div *ngIf="f.critereAdmission.errors.required">Veuiller entrer une présentation</div>
+              </mat-hint>
+            </mat-form-field>
+          </p>
+
+
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Critère d'évaluation</mat-label>
+              <mat-chip-list #chipListCE aria-label="critereevaluation selection">
+                <mat-chip
+                  *ngFor="let critereevaluation of critereevaluations"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="removeCE(critereevaluation)">
+                  {{critereevaluation}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="ajout Critère évaluation..."
+                  #grpCompetenceInput
+                  [formControl]="critereevaluationCtrl"
+                  [matChipInputFor]="chipListCE"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addCE($event)">
+              </mat-chip-list>
+              <!-- <mat-label>Critère d'admission </mat-label>
+              <textarea matInput  [ngClass]="{'is-invalid': submitted && f.critereadmission.errors }" type="text" formControlName="critereadmission"></textarea> -->
+              <mat-hint *ngIf="submitted && f.critereEvaluation.errors">
+                <div *ngIf="f.critereEvaluation.errors.required">Veuiller entrer des critères d'évaluation</div>
+              </mat-hint>
+            </mat-form-field>
+          </p>
+          <!-- <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Compétences  </mat-label>
+              <textarea matInput  [ngClass]="{'is-invalid': submitted && f.description.errors }" type="text" formControlName="description"> </textarea>
+              <mat-hint *ngIf="submitted && f.description.errors">
+                <div *ngIf="f.description.errors.required">Veuiller Mettre des compétences</div>
+              </mat-hint>
+            </mat-form-field>
+          </p> -->
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Groupe Compétences</mat-label>
+              <mat-chip-list #chipList aria-label="GrpCompetence selection">
+                <mat-chip
+                  *ngFor="let grpCompetence of grpCompetences"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(grpCompetence)">
+                  {{grpCompetence.libelle}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="ajout Groupe de Competences..."
+                  #grpCompetenceInput
+                  [formControl]="grpCompetenceCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let grpCompetence of filteredGrpCompetences | async" [value]="grpCompetence">
+                  {{grpCompetence.libelle}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </p>
+          <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+            <mat-chip
+              *ngFor="let grpCompetence of allGrpCompetences"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(grpCompetence)">
+              {{grpCompetence.libelle}}
+              <mat-icon  class="green" (click)="selectGrpCompetence(grpCompetence)">add</mat-icon>
+            </mat-chip>
+          </div>
+          <p>&nbsp;</p>
+
+            <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+        </form>
+  </mat-card>
+</div>

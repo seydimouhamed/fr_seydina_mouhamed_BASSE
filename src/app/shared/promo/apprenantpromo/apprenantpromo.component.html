@@ -1,0 +1,75 @@
+<!--
+    <div fxFill fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="gappx" color="warn">
+    <label for="file" mat-icon-button class='btn' color="primary" fxLayoutAlign="center center">
+      Charger un fichier
+      <mat-icon class="mat-18">ligature</mat-icon>
+    </label>
+    <input type="file" id="file" name="fileapprenant" fxHide="true" />
+  </div>
+-->
+<app-dnd (fileDropped)="onDocumentCheck($event)"></app-dnd>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx" fxFill>
+   <div fxFlex="100">
+    <div fxFlex="50" >
+      <p>
+        <h2>Ajouter des apprenants</h2>
+      <p>
+        <mat-form-field appearance="outline" class="w_100">
+          <mat-label>Adresse Email</mat-label>
+          <mat-chip-list #chipList aria-label="Apprenant selection">
+            <mat-chip
+              *ngFor="let apprenant of apprenants"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(apprenant)">
+              {{apprenant.email}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Nouveau apprenant..."
+              #apprenantInput
+              [formControl]="apprenantCtrl"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (keyup.enter)="add(apprenantInput)">
+          </mat-chip-list>
+        </mat-form-field>
+      </p>
+      <button type="submit" (click)="onSubmit()" mat-raised-button name="save"><span>Enregistrer <mat-spinner *ngIf="false" diameter='20'color='warn'></mat-spinner></span></button>
+
+    </div>
+    <div fxFlex="50" >
+      <fieldset>
+      <legend><h2>Liste des apprenants non Assignés</h2></legend>
+      <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="gappx">
+        <mat-chip-list #chipList aria-label="Apprenant selection">
+          <mat-chip
+            *ngFor="let apprenant of allApprenants"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(apprenant, true)">
+            {{apprenant.email}}
+            <mat-icon matChipRemove *ngIf="removable" class="orange">add</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+
+        <!-- <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="gappx">
+          <div fxLayout="row" fxLayoutAlign="start space-between" fxLayoutGap="gappx">
+            <span>{{ 2 }} apprenants en attente</span>
+            <button type="submit" mat-raised-button name="invitations">Relancer toutes les invitations</button>
+          </div>
+          <br>
+          <div>
+            apprenant1@gmail.com
+            <button type="submit" mat-raised-button name="invitation">Relancer l'invitation</button>
+          </div>
+          <div>
+            apprenant1@gmail.com
+            <button type="submit" mat-raised-button name="invitation">Relancer l'invitation</button>
+          </div> -->
+      </div>
+    </fieldset>
+    </div>
+  </div>
+
+</div>

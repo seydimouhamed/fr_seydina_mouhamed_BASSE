@@ -1,3 +1,4 @@
+import { DirectiveModule } from './../../@directive/directive.module';
 import { MaterialModule } from 'src/app/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,8 @@ import { CreatetProfilComponent } from './createt-profil/createt-profil.componen
   declarations: [ListProfilComponent, CreatetProfilComponent],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    DirectiveModule
   ],
   exports: [ListProfilComponent, CreatetProfilComponent]
 })

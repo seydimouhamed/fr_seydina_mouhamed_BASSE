@@ -7,16 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gestion-utilisateur.component.scss']
 })
 export class GestionUtilisateurComponent implements OnInit {
-  displayUsers = true;
-  currentProfil = '';
+
   constructor(private authService: AuthService) {
-    this.currentProfil = this.authService.getCurrentRole();
    }
 
   ngOnInit(): void {
   }
- createUserEvent(): void
- {
-  this.displayUsers = !this.displayUsers;
- }
 }

@@ -9,11 +9,10 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { GestionUtilisateurComponent } from './gestion-utilisateur/gestion-utilisateur.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, DashboardComponent, GestionUtilisateurComponent],
+  declarations: [AdminComponent, DashboardComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

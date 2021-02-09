@@ -1,6 +1,6 @@
 import { Profil } from './../../../models/Profil';
 import { ProfilService } from './../profil.service';
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -29,7 +29,7 @@ export class ListProfilComponent implements OnInit {
 
   displayUsers(row): void{
     this.profilService.currentProfilSubject.next(row.libelle);
-    alert(row.libelle);
+    // alert(row.libelle);
   }
 
   getProfils(): void

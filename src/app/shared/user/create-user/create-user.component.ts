@@ -1,8 +1,9 @@
+import { User } from './../../../models/User';
 import { UserService } from './../user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { error } from 'protractor';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
@@ -13,12 +14,36 @@ export class CreateUserComponent implements OnInit {
   submitted = false;
   hide = false;
   busy = false;
+  updateUser = false;
+
+  @Input() userdata: User;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService) { }
 
   ngOnInit(): void {
+    // Swal.fire({
+    //   title: 'Error!',
+    //   text: 'Do you want to continue',
+    //   icon: 'error',
+    //   confirmButtonText: 'Cool'
+    // });
     this.getRegisterForm();
+    if (this.userdata !== undefined)
+    {
+      this.updateUser = true;
+      console.log(this.userdata.profil.id);
+      this.registerForm.setValue({
+        usernme: this.userdata['usernme'],
+        email: this.userdata.email,
+        firstname: this.userdata.firstname,
+        lastname: this.userdata.lastname,
+        idProfil: this.userdata.profil.id,
+        avatar: '',
+      });
+    }else {
+     // alert('undifined');
+    }
   }
 
 
@@ -35,6 +60,7 @@ export class CreateUserComponent implements OnInit {
  }
 
 onSubmit(): void{
+
   this.submitted = true;
 
   if ( this.registerForm.invalid ){
@@ -50,6 +76,27 @@ onSubmit(): void{
     registerFormData.append(att, this.registerForm.get(att).value);
   }
 
+  if (!this.updateUser){
+
+    alert('dans le persiste');
+    this.persist(registerFormData);
+  }
+  else {
+    alert('dans le update');
+    this.update(registerFormData);
+  }
+
+  // this.userService.addUser(registerFormData).
+  //   subscribe(response => {
+  //         alert('ajouté avec success!');
+  //   }, err => {
+  //           console.log(err);
+  //           alert(err);
+  //   });
+}
+persist(registerFormData): void
+{
+
   this.userService.addUser(registerFormData).
     subscribe(response => {
           alert('ajouté avec success!');
@@ -58,8 +105,19 @@ onSubmit(): void{
             alert(err);
     });
 }
-
-  public get f(){
+update(updateFormData: FormData): void
+{
+  updateFormData.append('_method', 'PUT');
+  this.userService.updateUser(this.userdata.id, updateFormData).
+    subscribe(response => {
+          console.log(response);
+          alert('modifié avec success!');
+    }, err => {
+            console.log(err);
+            alert(err);
+    });
+}
+  public get f(): any{
       return this.registerForm.controls;
   }
 }

@@ -17,7 +17,7 @@ import { PresentationModule } from './shared/presentation/presentation.module';
   declarations: [
     AppComponent,
     ErrorComponent,
-    MainComponent
+    MainComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <h2>Utilisateurs</h2>
 
-<table mat-table [dataSource] = "dataSource"  class="mat-elevation-z8"  autosize>
+<table mat-table [dataSource] = "dataSource"  class="mat-elevation-z2"  autosize>
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select" fxFlexFill autosize>
@@ -50,14 +50,20 @@
     <td mat-cell *matCellDef="let element" >{{element.email}}</td>
   </ng-container>
 
-  <!-- Name Column -->
+  <!-- Name Profils -->
   <ng-container matColumnDef="profil">
-    <th mat-header-cell *matHeaderCellDef> Profil </th>
-    <td mat-cell *matCellDef="let element" >{{element.profil.libelle}}</td>
+    <th mat-header-cell *matHeaderCellDef>Profil</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="profil" >{{element.profil.libelle}}</div>
+      <div class="action">
+        <button  mat-button><mat-icon class="color_green">edit</mat-icon></button>
+        <button  mat-button (click)="deleteUser(element)"><mat-icon  class="color_red">delete</mat-icon></button>
+      </div>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row  appShadowOver *matRowDef="let row; columns: displayedColumns;" matRipple >
+  <tr mat-row appShadowOver appComponentAction class="visibleprofil" *matRowDef="let row; columns: displayedColumns;" [id]="'id_'+row.id" (dblclick)="detailUser(row.id)" (mouseenter) ="setUserOver(row.id) " (mouseleave) ="setUserOver(row.id)" matRipple >
   </tr>
 </table>
-<mat-paginator class="mat-elevation-z8" [length]="nbrItems" [pageSizeOptions]="[5,10,15,20]" (page)="changeThing($event)"> </mat-paginator>
+<mat-paginator class="mat-elevation-z2" [length]="nbrItems" [pageSizeOptions]="[5,10,15,20]" (page)="changeThing($event)"> </mat-paginator>

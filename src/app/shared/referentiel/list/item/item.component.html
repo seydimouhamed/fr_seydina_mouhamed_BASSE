@@ -1,0 +1,134 @@
+<mat-card >
+  <mat-card-header fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+
+    <mat-card-title>{{ referentiel.libelle }}</mat-card-title>
+    <div>
+      <mat-icon></mat-icon>
+
+      <button mat-stroked-button >
+        <mat-icon class="color_green">edit</mat-icon>
+      </button>
+      &nbsp;
+      <button mat-stroked-button aria-label="delete">
+        <mat-icon class="color_red">delete</mat-icon>
+      </button>
+      &nbsp;
+      <button mat-stroked-button aria-label="delete" (click)="generatePDF()">
+        <mat-icon>save_alt</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+
+<mat-divider></mat-divider>
+  <mat-card-content>
+    <fieldset>
+      <legend>Présentation</legend>
+      <p>
+        {{ referentiel.presentation }}
+      </p>
+    </fieldset>
+  </mat-card-content>
+  <mat-card-footer>
+      <mat-accordion>
+
+        <!-- Programme-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Programme
+            </mat-panel-title>
+          </mat-expansion-panel-header >
+          <p>
+            <div fxLayout="row" *ngIf="this.referentiel.programme" fxLayoutAlign="space-between  start" fxLayoutGap="gappx">
+              <div>PDF du programme</div>
+              <div>
+                &nbsp;&nbsp;&nbsp;
+                <button mat-stroked-button aria-label="delete">
+                  <mat-icon>fullscreen</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <iframe [id]="'iframe_'+index" class="w_100"></iframe>
+
+        </mat-expansion-panel>
+
+        <!-- Groupes de compétences-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Groupes Compétences
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <p>
+            <mat-chip
+                  *ngFor="let competence of referentiel.grpCompetences"
+                  >
+                  {{competence.libelle}}
+            </mat-chip></p>
+        </mat-expansion-panel>
+        <!-- Critères d'évaluation -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Critère d'évalution
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+            <ul>
+              <li *ngFor="let ce of critereEvalutions">
+                {{ ce }}
+              </li>
+            </ul>
+        </mat-expansion-panel>
+        <!-- Critères d'admission -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Critère d'admission
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+            <ul>
+              <li *ngFor="let ca of critereAdmissions">
+                {{ ca }}
+              </li>
+            </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+      <!-- <div>
+        <fieldset>
+          <legend>Groupes Compétences</legend>
+          <mat-chip
+                *ngFor="let competence of referentiel.grpCompetences"
+                >
+                {{competence.libelle}}
+          </mat-chip>
+        </fieldset>
+      </div> -->
+      <!-- <div>
+        <fieldset>
+          <legend>Critère d'évalution</legend>
+          <ul>
+            <li *ngFor="let ce of critereEvalutions">
+              {{ ce }}
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+      <div> -->
+        <!-- <fieldset>
+          <legend>Critère d'admission</legend>
+          <ul>
+            <li *ngFor="let ca of critereAdmissions">
+              {{ ca }}
+            </li>
+          </ul>
+        </fieldset>
+      </div> -->
+  </mat-card-footer>
+</mat-card>

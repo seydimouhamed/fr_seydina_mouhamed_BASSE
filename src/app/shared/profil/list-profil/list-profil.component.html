@@ -1,6 +1,6 @@
 <h1>PROFILS</h1>
 
-<table mat-table [dataSource] = "dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource] = "dataSource" class="mat-elevation-z2">
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
@@ -38,10 +38,10 @@
   <ng-container matColumnDef="libelle">
     <th mat-header-cell *matHeaderCellDef> Libelle </th>
     <!-- <td mat-cell *matCellDef="let element"  (dblclick)="toInput(element.id)" ><input matInput (keydown.enter)="onBlurInput(element.id,element.libelle)" (blur)="onBlurInput(element.id,element.libelle)" #input{{element.id}} [readonly]="!editable" type="text" value="{{element.libelle}}" ></td> -->
-    <td mat-cell *matCellDef="let element" >{{element.libelle}}</td>
+    <td  mat-cell *matCellDef="let element" >{{element.libelle}}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayUsers(row)">
+  <tr mat-row appShadowOver *matRowDef="let row; columns: displayedColumns;" (click)="displayUsers(row)">
   </tr>
 </table>

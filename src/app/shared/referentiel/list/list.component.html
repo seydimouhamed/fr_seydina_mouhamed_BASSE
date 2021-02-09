@@ -1,0 +1,9 @@
+<br>
+<div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
+  <a mat-raised-button routerLink= './../add' class="">ADD NEW<mat-icon>add</mat-icon></a>
+</div>
+<br>
+<div fxLayout="row wrap"  fxLayoutAlign="space-around start" fxFlexFill fxLayoutGap="15px" autosize >
+    <app-item fxFlex="75" *ngFor="let ref of referentiels;let i=index" [referentiel]="ref" [index]="i"></app-item>
+
+</div>

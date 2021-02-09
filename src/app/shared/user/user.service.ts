@@ -19,10 +19,20 @@ export class UserService {
     }
     return this.http.get<User[]>(URL);
   }
+
+  getUserById(id: number): Observable<User>{
+    const URL = `${this.baseUrl}/${id}`;
+
+    return this.http.get<User>(URL);
+  }
   addUser(userData): Observable<any>{
     return this.http.post<any>(this.baseUrl, userData);
   }
-  updateProfil(user: User): Observable<User>{
-    return this.http.put<User>(`${this.baseUrl}/${user.id}`, user);
+  updateUser(id: number, data: FormData): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/${id}`, data);
+  }
+  delete(id: number): any{
+    const URL = `${this.baseUrl}/${id}`;
+    return this.http.delete<any>(URL);
   }
 }

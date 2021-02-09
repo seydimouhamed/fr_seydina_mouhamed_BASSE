@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/features/auth/auth.service';
 import { getType } from '@angular/flex-layout/extended/typings/style/style-transforms';
+import { navigation } from 'src/app/config/navigation.service';
 
 @Component({
   selector: 'app-main',
@@ -17,18 +18,22 @@ export class MainComponent implements OnInit {
   fixDetails = false;
   isAuth = false;
   currentProfil = '';
+
+  navigation$ = navigation;
+  // navebar
+
     constructor(private authService: AuthService, private router: Router) {
 
       this.authService.currentUser.subscribe(
         (user: User) => {
          // console.log(user.token+""+"sdksq");
           if ( !user ){
-           // console.log(user);
             this.isAuth = false;
           }else
           {
             this.isAuth = true;
             this.currentProfil = this.authService.getCurrentRole();
+            //
           }
         }
       );

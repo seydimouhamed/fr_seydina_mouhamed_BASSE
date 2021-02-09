@@ -5,10 +5,11 @@
 table{
   width: 100%;
 }
-/* .mat-row:hover {
+ .mat-row:hover {
   // background-color: red !important;
+  z-index: 8;
   box-shadow: 5px 5px 5px #aaa;
-}*/
+}
 
 .w_70_h_70
 {
@@ -17,4 +18,27 @@ table{
     margin-top: 2%;
     margin-left: 2%;
     border-radius: 50%;
+}
+
+.visibleprofil{
+  td
+  {
+    .profil{
+      display: block;
+    }
+    .action{
+      display: none;
+    }
+  }
+}
+
+.visibleaction{
+  td{
+    .profil{
+      display: none;
+    }
+    .action{
+      display: block;
+    }
+  }
 }

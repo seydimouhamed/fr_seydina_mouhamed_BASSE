@@ -1,0 +1,33 @@
+
+.color_red{
+  color: red;
+}
+.color_green{
+  color: lime;
+}
+mat-card {
+  margin: 10px !important;
+}
+ul {
+  margin: 0.75em 0;
+  padding: 0 1em;
+  list-style: none;
+}
+li:before {
+  content: "\f006";
+  font-family: 'FontAwesome';
+  border-color: transparent #ff7713;
+  border-style: solid;
+  // border-width: 0.35em 0 0.35em 0.45em;
+  display: block;
+  height: 0;
+  width: 0;
+  left: -1em;
+  top: 0.9em;
+  position: relative;
+}
+
+
+.w_100{
+  width: 100%;
+}

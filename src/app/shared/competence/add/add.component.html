@@ -1,0 +1,58 @@
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+  <a mat-raised-button routerLink= './../list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
+  <h2>&nbsp;</h2>
+  <h2>&nbsp;</h2>
+</div>
+<br><br>
+<div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
+  <mat-card class="green form" >
+    <mat-card-title ><h1> Ajouter une compétence</h1> </mat-card-title >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+      <p>
+        <mat-form-field appearance="outline" class="w_100">
+          <mat-label>Libelle </mat-label>
+          <input matInput  [ngClass]="{'is-invalid': submitted && f.libelle.errors }" type="text" formControlName="libelle">
+          <mat-hint *ngIf="submitted && f.libelle.errors">
+            <div *ngIf="f.email.errors.required">Veuiller entrer un libelle </div>
+          </mat-hint>
+        </mat-form-field>
+
+      </p>
+      <p>
+        <mat-form-field appearance="outline" class="w_100">
+          <mat-label>Descriptif</mat-label>
+          <textarea matInput  [ngClass]="{'is-invalid': submitted && f.descriptif.errors }" type="text" formControlName="descriptif"></textarea>
+          <mat-hint *ngIf="submitted && f.descriptif.errors">
+            <div *ngIf="f.descriptif.errors.required">Veuiller Mettre un descriptif</div>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+      <div formArrayName="niveaux">
+      <p>
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z w_100">
+          <mat-tab  *ngFor="let niveau of form.controls.niveaux['controls'];let i=index" [label]="'Niveau '+ (i+1) " [formGroupName]="i">
+            <p>
+              <mat-form-field appearance="outline" class="w_50" >
+                <mat-label>Groupes d'actions </mat-label>
+                <textarea matInput  [ngClass]="{'is-invalid': submitted && f.niveaux.controls[i].controls.critereEvaluation.errors }" type="text" formControlName="critereEvaluation"></textarea>
+                <mat-hint *ngIf="submitted && f.niveaux.controls[i].controls.critereEvaluation.errors">
+                  Veuiller Mettre le groupe d'action
+                </mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="w_50">
+                <mat-label>Critères d'evalution </mat-label>
+                <textarea matInput  [ngClass]="{'is-invalid': submitted && f.niveaux.controls[i].controls.groupeAction.errors }" type="text" formControlName="groupeAction"></textarea>
+                <mat-hint *ngIf="submitted && f.niveaux.controls[i].controls.groupeAction.errors">
+                  Veuiller Mettre le critère
+                </mat-hint>
+              </mat-form-field>
+            </p>
+          </mat-tab>
+        </mat-tab-group>
+      </p>
+      </div>
+      <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+    </form>
+  </mat-card>
+</div>

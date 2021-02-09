@@ -1,0 +1,114 @@
+<br>
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+  <a mat-raised-button routerLink= './../list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
+  <h2>&nbsp;</h2>
+  <h2>&nbsp;</h2>
+</div>
+<br><br>
+<div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
+  <mat-card class=" form" >
+    <mat-card-title ><h1> Ajouter un Groupe de compétence</h1> </mat-card-title >
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Libelle </mat-label>
+              <input matInput  [ngClass]="{'is-invalid': submitted && f.libelle.errors }" type="text" formControlName="libelle">
+              <mat-hint *ngIf="submitted && f.libelle.errors">
+                <div *ngIf="f.libelle.errors.required">Veuiller entrer un libelle </div>
+              </mat-hint>
+            </mat-form-field>
+
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Description </mat-label>
+              <textarea matInput  [ngClass]="{'is-invalid': submitted && f.descriptif.errors }" type="text" formControlName="descriptif"> </textarea>
+              <mat-hint *ngIf="submitted && f.descriptif.errors">
+                <div *ngIf="f.descriptif.errors.required">Veuiller entrer une description</div>
+              </mat-hint>
+            </mat-form-field>
+          </p>
+
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Compétences</mat-label>
+              <mat-chip-list #chipList aria-label="Competence selection">
+                <mat-chip
+                  *ngFor="let competence of competences"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(competence)">
+                  {{competence.libelle}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Compétence..."
+                  #fruitInput
+                  [formControl]="competenceCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let competence of filteredCompetences | async" [value]="competence">
+                  {{competence.libelle}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </p>
+            <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+              <mat-chip
+                *ngFor="let competence of allCompetences"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(competence)">
+                {{competence.libelle}}
+                <mat-icon  class="green" (click)="selectCompetence(competence)">add</mat-icon>
+              </mat-chip>
+            </div>
+            <p>&nbsp;</p>
+          <!-- // {{ tags | json}} -->
+          <p>
+            <mat-form-field appearance="outline" class="w_100">
+              <mat-label>Tags</mat-label>
+              <mat-chip-list #chipListTag aria-label="Tag selection">
+                <mat-chip
+                  *ngFor="let tag of tags"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="removeTag(tag)">
+                  {{tag.libelle}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Tag..."
+                  #fruitInput
+                  [formControl]="tagCtrl"
+                  [matAutocomplete]="auto1"
+                  [matChipInputFor]="chipListTag"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addTag($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedTag($event)">
+                <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                   {{tag.libelle}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </p>
+          <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="10px">
+              <mat-chip
+                *ngFor="let tag of allTags"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="selectTag(tag)">
+                {{tag.libelle}}
+                <mat-icon class="green" (click)=selectTag(tag)>add</mat-icon>
+              </mat-chip>
+          </div>
+          <p>&nbsp;</p>
+            <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+        </form>
+  </mat-card>
+</div>

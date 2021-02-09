@@ -1,0 +1,23 @@
+import { ApprenantpromoComponent } from './apprenantpromo/apprenantpromo.component';
+import { PromoComponent } from './promo.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ListComponent } from './list/list.component';
+import { AddComponent } from './add/add.component';
+import { DetailsComponent } from './details/details.component';
+
+const routes: Routes = [{
+  path: '', component: PromoComponent, children: [
+    {path: '', redirectTo: 'add', pathMatch: 'full'},
+    {path: 'list', component: ListComponent},
+    {path: 'add', component: AddComponent},
+    {path: 'add/apprenants', component: ApprenantpromoComponent},
+    {path: 'details/:id', component: DetailsComponent},
+  ]
+}];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PromoRoutingModule { }

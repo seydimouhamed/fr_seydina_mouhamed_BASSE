@@ -22,6 +22,8 @@ const routes: Routes = [
   canActivate: [FormateurGard]
 },
   { path: 'cm', loadChildren: () => import('./features/cm/cm.module').then(m => m.CmModule), canActivate: [CmGard] },
+  { path: 'tag', loadChildren: () => import('./shared/tag/tag.module').then(m => m.TagModule) },
+  { path: 'grptag', loadChildren: () => import('./shared/grptag/grptag.module').then(m => m.GrptagModule) },
   { path: '**', component: ErrorComponent},
 ];
 

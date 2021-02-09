@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProfilService } from './../../profil/profil.service';
 import { Observable } from 'rxjs';
 import { UserService } from './../user.service';
@@ -6,7 +7,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/User';
 import { PageEvent } from '@angular/material/paginator';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -20,6 +21,8 @@ export class ListUserComponent implements OnInit {
   nbrItems: number;
   pageIndex = 0;
   currentProfil = '';
+  userOver = false;
+
 
 //  @Input() profilUser: string;
 
@@ -34,7 +37,8 @@ export class ListUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private profilService: ProfilService
+    private profilService: ProfilService,
+    private router: Router
     ) {
     }
 
@@ -62,6 +66,47 @@ export class ListUserComponent implements OnInit {
             this.dataSource = new MatTableDataSource<User>(this.users);
           }
         );
+  }
+
+  detailUser(id){
+    this.router.navigate(['admin/users/details', id]);
+   // alert(id);
+  }
+  // --------------//
+  // deleting user //
+  // --------------//
+  deleteUser(element): void {
+
+   // return;
+    Swal.fire({
+      title: 'Vous etes sur de vouloir supprimer',
+      text: '(l\'utilisateur sera archiver)',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Cconfirmer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.value) {
+        this.userService.delete(element.id).subscribe(
+          data => {
+            this.dataSource.data.splice(this.users.indexOf(element), 1);
+            this.dataSource._updateChangeSubscription();
+            // Swal.fire(
+            //   'Suppimé avec succes!',
+            //   'l\'utilisateur a été archivé avec succès!',
+            //   'success'
+            // );
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        );
+      }
+    });
+
   }
 
   getUsers(): void
@@ -104,5 +149,9 @@ export class ListUserComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
+  setUserOver(): void {
 
+    this.userOver ? this.userOver = false : this.userOver = true;
+   // console.log(this.userOver);
+  }
 }
