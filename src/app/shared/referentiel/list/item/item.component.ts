@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Referentiel } from './../../../../models/Referentiel';
 import { Component, Input, OnInit, OnChanges, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
@@ -19,7 +20,9 @@ export class ItemComponent implements OnInit, AfterViewInit {
   @Output() deleteI = new EventEmitter();
   critereEvalutions: Array<string>;
   critereAdmissions: Array<string>;
-  constructor() { }
+  constructor(
+  private router: Router
+  ) { }
   ngOnInit(): void {
     this.critereEvalutions = JSON.parse(this.referentiel.critereEvaluation);
     this.critereAdmissions = JSON.parse(this.referentiel.critereAdmission);
@@ -84,5 +87,10 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
   delete(referentiel): void {
     this.deleteI.emit(this.referentiel);
+  }
+
+
+  detail(id): void{
+    this.router.navigate(['/admin/referentiel/details', +id]);
   }
 }

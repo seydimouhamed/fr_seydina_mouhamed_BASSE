@@ -1,11 +1,11 @@
 <br>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-  <a mat-raised-button routerLink= './../' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
+  <a mat-raised-button routerLink= '/admin/referentiel' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
 </div>
 <br>
 <div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
   <mat-card class="green form" >
-    <mat-card-title ><h1> Ajouter un Referentiel</h1> </mat-card-title >
+    <mat-card-title ><h1><span *ngIf="referentiel">Actualiser</span > <span *ngIf="!referentiel">Ajouter</span> Referentiel</h1> </mat-card-title >
         <form [formGroup]="form" (ngSubmit)="onSubmit()" >
           <p>
             <mat-form-field appearance="outline" class="w_100">
@@ -135,7 +135,7 @@
           </div>
           <p>&nbsp;</p>
 
-            <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+            <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span> <span *ngIf="referentiel">Actualiser</span><span *ngIf="!referentiel">Enregister</span ><mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
         </form>
   </mat-card>
 </div>

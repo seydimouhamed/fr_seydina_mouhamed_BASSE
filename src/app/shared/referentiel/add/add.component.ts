@@ -1,8 +1,10 @@
+import { AlertService } from './../../../_helper/alert.service';
+import { Referentiel } from './../../../models/Referentiel';
 import { GrpCompetenceService } from './../../grp-competence/grp-competence.service';
 import { ReferentielService } from './../referentiel.service';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
@@ -17,6 +19,8 @@ import { GrpCompetence } from '@/app/models/GrpCompetence';
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
+
+  @Input() referentiel: Referentiel;
 form: FormGroup;
 submitted = false;
 busy = false;
@@ -55,7 +59,8 @@ busy = false;
   constructor(
     private formBuilder: FormBuilder,
     private refService: ReferentielService,
-    private grpCompetenceService: GrpCompetenceService
+    private grpCompetenceService: GrpCompetenceService,
+    private alert: AlertService
     ) {
 
     this.filteredGrpCompetences = this.grpCompetenceCtrl.valueChanges.pipe(
@@ -81,10 +86,13 @@ busy = false;
   ngOnInit(): void {
     this.grpCompetenceService.getAll().subscribe(
       grpCompetences => {
-        this.allGrpCompetences = grpCompetences['hydra:member'];
+        const gCData = grpCompetences['hydra:member'];
+
+        this.allGrpCompetences = this.initialiseTabs(gCData, this.grpCompetences);
       }
     );
     this.getRegisterForm();
+    this.setUpdateData(this.referentiel);
   }
 
   onFileSelect(event): void
@@ -141,14 +149,23 @@ getIRIGrpCompetence(): any
     formData.append('critereAdmission', this.form.value.critereAdmission);
     formData.append('programme', this.form.value.programme);
 
-    this.refService.addReferentiel(formData).
-        subscribe( response => {
-            console.log(response);
-            alert('ok');
+    if (this.referentiel)
+    {
+      formData.append('_method', 'PUT');
+      this.refService.update(this.referentiel.id, formData).
+        subscribe( () => {
+           this.alert.getSimpleAlert('success', 'Actualiser avec succès');
         },
-        error => alert('Erreur lors de linsertion')
+        () => this.alert.getSimpleAlert('warning', 'Erreur lors de l\'actualisation')
         );
-
+    }else {
+      this.refService.addReferentiel(formData).
+        subscribe( response => {
+           this.alert.getSimpleAlert('success', 'Ajouter avec succès');
+        },
+        error => this.alert.getSimpleAlert('warning', ' Erreur lors de l\'ajout')
+        );
+      }
   }
 
 
@@ -299,4 +316,42 @@ getIRIGrpCompetence(): any
   }
   // submit traitement
 
+
+  // ------------------------//
+  //   UPDATE REFERENTIEL    //
+  // -----------------------//
+
+  setUpdateData(referentiel: Referentiel): void
+  {
+    this.form.patchValue({
+      libelle: referentiel.libelle,
+      presentation: referentiel.presentation,
+    });
+    this.critereadmissions = JSON.parse(this.referentiel.critereAdmission);
+    this.critereevaluations = JSON.parse(this.referentiel.critereEvaluation);
+    this.grpCompetences = referentiel.grpCompetences;
+  }
+
+
+ initialiseTabs(tabAll: any[], tabPartiel: any[]): any[]
+ {
+    const tab = [];
+    tabAll.forEach(
+      item => {
+        let bool = true;
+        tabPartiel.forEach(itemP =>
+          {
+              if (itemP.id === item.id) {
+                  bool = false;
+              }
+          }
+          );
+        if (bool) {
+          tab.push(item);
+        }
+      }
+    );
+
+    return tab;
+ }
 }

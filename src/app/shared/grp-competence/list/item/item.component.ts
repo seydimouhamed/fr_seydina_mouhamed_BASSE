@@ -28,7 +28,7 @@ export class ItemComponent implements OnInit {
    }
 
 
-  detailUser(id): void{
+  detail(id): void{
     this.router.navigate(['/admin/grpCompetence/details', +id]);
   }
 }

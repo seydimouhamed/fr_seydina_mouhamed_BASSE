@@ -29,7 +29,7 @@ baseUrl = `${environment.apiUrl}admin/referentiels`;
 
   update(id, referentiel): Observable<Referentiel>
   {
-    return this.http.put<Referentiel>(`${this.baseUrl}/${id}`, referentiel);
+    return this.http.post<Referentiel>(`${this.baseUrl}/${id}`, referentiel);
   }
 
   delete(id: number): Observable<any>
