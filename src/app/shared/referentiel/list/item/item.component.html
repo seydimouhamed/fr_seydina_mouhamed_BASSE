@@ -5,15 +5,15 @@
     <div>
       <mat-icon></mat-icon>
 
-      <button mat-stroked-button >
-        <mat-icon class="color_green">edit</mat-icon>
+      <button mat-mini-fab color="basic">
+        <mat-icon  class="color_green">edit</mat-icon>
       </button>
       &nbsp;
-      <button mat-stroked-button aria-label="delete">
+      <button mat-mini-fab color="basic" aria-label="delete" (click)="delete(referentiel)">
         <mat-icon class="color_red">delete</mat-icon>
       </button>
       &nbsp;
-      <button mat-stroked-button aria-label="delete" (click)="generatePDF()">
+      <button mat-mini-fab color="basic" aria-label="delete" (click)="generatePDF()">
         <mat-icon>save_alt</mat-icon>
       </button>
     </div>

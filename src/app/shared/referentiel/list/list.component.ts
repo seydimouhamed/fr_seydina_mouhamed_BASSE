@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { ActivatedRoute, Data } from '@angular/router';
 import { ReferentielService } from './../referentiel.service';
 import { Referentiel } from '@/app/models/Referentiel';
@@ -25,4 +26,36 @@ export class ListComponent implements OnInit {
        });
   }
 
+  delete(ref: Referentiel): void
+  {
+    Swal.fire({
+      title: 'Vous etes sur de vouloir supprimer',
+      text: '(le groupe de competence sera archiver)',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.value) {
+        this.referentielService.delete(ref.id).
+            subscribe(
+              () => {
+                this.removeItemFormList(ref);
+                Swal.fire (
+                  'Supprimé avec succes',
+                  '',
+                  'success'
+                );
+              }
+            );
+      }
+    });
+  }
+
+  removeItemFormList(referentiel: Referentiel): void{
+    const index = this.referentiels.indexOf(referentiel);
+    if (index >= 0){
+      this.referentiels.splice(+index, 1);
+    }
+  }
 }

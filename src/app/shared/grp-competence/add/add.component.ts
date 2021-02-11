@@ -1,3 +1,5 @@
+import { AlertService } from './../../../_helper/alert.service';
+import { Router } from '@angular/router';
 import { GrptagService } from './../../grptag/grptag.service';
 import { TagService } from './../../tag/tag.service';
 import { CompetenceService } from './../../competence/competence.service';
@@ -5,7 +7,7 @@ import { GrpCompetence } from './../../../models/GrpCompetence';
 import { GrpCompetenceService } from './../grp-competence.service';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
@@ -14,13 +16,16 @@ import {map, startWith} from 'rxjs/operators';
 import { Competence } from 'src/app/models/Competence';
 import { Tag } from 'src/app/models/Tag';
 
-
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
+// ----Input update grpCompetence
+@Input() grpCompetence: GrpCompetence;
+// ----Input update grpCompetence
+
 form: FormGroup;
 submitted = false;
 busy = false;
@@ -54,7 +59,9 @@ private HYDRA = 'hydra:member';
     private grpCompeteenceService: GrpCompetenceService,
     private competenceService: CompetenceService,
     private grpTagService: GrptagService,
-    private tagService: TagService
+    private tagService: TagService,
+    private route: Router,
+    private alert: AlertService
     ) {
 
     this.filteredCompetences = this.competenceCtrl.valueChanges.pipe(
@@ -78,22 +85,28 @@ private HYDRA = 'hydra:member';
     // -- Debut recuperation des groupes de tags
     this.tagService.getAll()
       .subscribe( response => {
-         this.allTags = response[this.HYDRA];
-          console.log(response[this.HYDRA]);
+         const tagData = response[this.HYDRA];
+         this.allTags = this.initialiseTabs(tagData, this.tags);
+        //  this.allTags = this.allTags.filter( item => {
+        //     return item.id
+        //  });
       });
     // -- Fin recuperation des groupes de tags
 
     // -- Debut recuperation des competences
     this.competenceService.getAllCompetenceResume()
     .subscribe( response => {
-      this.allCompetences = response[this.HYDRA];
-        console.log(response[this.HYDRA]);
+      const competencesData = response[this.HYDRA];
+      this.allCompetences = this.initialiseTabs(competencesData, this.competences);
     });
   // -- Fin recuperation des competences
   }
 
   ngOnInit(): void {
     this.getRegisterForm();
+    if (this.grpCompetence){
+      this.setUdpdateData();
+    }
   }
 
   getAllCompetence(): Competence[]{
@@ -248,13 +261,56 @@ private HYDRA = 'hydra:member';
   grpCompetence.competences = [];
   this.competences.forEach( (competence: Competence) => grpCompetence.competences.push(competence['@id']));
   this.tags.forEach((tag: Tag) => grpCompetence.tags.push(tag['@id']));
-  console.log(this.form.value);
-  this.grpCompeteenceService.addGrpCompetence(this.form.value).
+  if (!this.grpCompetence){
+    this.grpCompeteenceService.addGrpCompetence(this.form.value).
       subscribe( grpComp => {
-        console.log(grpComp);
-        alert('ajouté avec succes');
+            this.alert.getSimpleAlert('success', 'ajouter avec succes');
+            this.route.navigate(['/admin/grpCompetence/list']);
       });
+  }
+  else{
+    this.grpCompeteenceService.updateGrpCompetence(this.grpCompetence.id, this.form.value).
+      subscribe( grpComp => {
+        this.alert.getSimpleAlert('success', 'ajouter avec succes');
+        this.route.navigate(['/admin/grpCompetence/list']);
+      });
+  }
  }
+    // ---------------------------------//
+    //        UPDATE MANAGEMENT         //
+    // ---------------------------------//
 
+setUdpdateData(): void{
+  const gc = this.grpCompetence;
+  this.form.patchValue({
+    libelle: gc.libelle,
+    descriptif: gc.descriptif
+  });
 
+  this.competences = gc.competences;
+  this.tags = gc.tags;
+
+}
+ initialiseTabs(tabAll: any[], tabPartiel: any[]): any[]
+ {
+    const tab = [];
+    tabAll.forEach(
+      item => {
+        let bool = true;
+        //return this.allCompetences.filter(competence => competence.libelle.toLowerCase().indexOf(filterValue) === 0);
+        tabPartiel.forEach(itemP =>
+          {
+              if (itemP.id === item.id) {
+                  bool = false;
+              }
+          }
+          );
+        if (bool) {
+          tab.push(item);
+        }
+      }
+    );
+
+    return tab;
+ }
 }

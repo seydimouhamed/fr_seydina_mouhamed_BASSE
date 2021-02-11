@@ -32,10 +32,10 @@ export class ListComponent implements OnInit {
 
     Swal.fire({
       title: 'Vous etes sur de vouloir supprimer',
-      text: '(l\'e groupe de competence sera archiver)',
+      text: '(le groupe de competence sera archiver)',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Cconfirmer',
+      confirmButtonText: 'Confirmer',
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.value) {
@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
                this.grpCompetences.splice(+id, 1);
                Swal.fire (
                 'Supprimé avec succes',
-                'Your imaginary file is safe :)',
+                '',
                 'success'
                );
               }

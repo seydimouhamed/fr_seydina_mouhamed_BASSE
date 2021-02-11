@@ -26,6 +26,10 @@ baseUrl = `${environment.apiUrl}admin/grpecompetences`;
   {
     return this.http.post<any>(`${this.baseUrl}`, data);
   }
+  updateGrpCompetence(id, data): Observable<any>
+  {
+    return this.http.put<any>(`${this.baseUrl}/${id}`, data);
+  }
 
   delete(id: number): Observable<any>
   {

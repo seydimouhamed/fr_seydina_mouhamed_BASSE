@@ -1,5 +1,5 @@
 import { Referentiel } from './../../../../models/Referentiel';
-import { Component, Input, OnInit, OnChanges, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, AfterContentInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import {MatChipInputEvent} from '@angular/material/chips';
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -16,6 +16,7 @@ export class ItemComponent implements OnInit, AfterViewInit {
   panelOpenState = false;
   @Input() referentiel: Referentiel;
   @Input() index: number;
+  @Output() deleteI = new EventEmitter();
   critereEvalutions: Array<string>;
   critereAdmissions: Array<string>;
   constructor() { }
@@ -79,5 +80,9 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
     pdfMake.createPdf(documentDefinition).open();
   }
+ // DELETE
 
+  delete(referentiel): void {
+    this.deleteI.emit(this.referentiel);
+  }
 }

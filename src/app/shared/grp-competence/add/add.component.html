@@ -1,13 +1,11 @@
 <br>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-  <a mat-raised-button routerLink= './../list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
-  <h2>&nbsp;</h2>
-  <h2>&nbsp;</h2>
+  <a mat-raised-button routerLink= '/admin/grpCompetence/list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
 </div>
-<br><br>
+<br>
 <div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
   <mat-card class=" form" >
-    <mat-card-title ><h1> Ajouter un Groupe de compétence</h1> </mat-card-title >
+    <mat-card-title ><h1><span *ngIf="grpCompetence">Actualiser </span> <span *ngIf="!grpCompetence">Ajouter </span>Groupe de compétence</h1> </mat-card-title >
         <form [formGroup]="form" (ngSubmit)="onSubmit()" >
           <p>
             <mat-form-field appearance="outline" class="w_100">

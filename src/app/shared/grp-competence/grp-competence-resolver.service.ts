@@ -13,9 +13,7 @@ export class GrpCompetenceResolverService implements Resolve<GrpCompetence> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<GrpCompetence> | Promise<GrpCompetence> | GrpCompetence {
     const ID = 'id';
-    const data = this.grpCompetenceService.getById(+route.params[ID]);
-    console.log(data);
-    return data;
+    return this.grpCompetenceService.getById(+route.params[ID]);
   }
 
 }
