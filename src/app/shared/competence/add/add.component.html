@@ -1,13 +1,13 @@
 <br>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-  <a mat-raised-button routerLink= './../list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
+  <a mat-raised-button routerLink= '/admin/competence/list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
   <h2>&nbsp;</h2>
   <h2>&nbsp;</h2>
 </div>
 <br><br>
 <div fxFill  fxLayout="row"  fxLayoutAlign="center center" >
   <mat-card class="green form" >
-    <mat-card-title ><h1> Ajouter une compétence</h1> </mat-card-title >
+    <mat-card-title ><h1> <span *ngIf="competence">Actualiser</span> <span *ngIf="!competence">Ajouter</span> compétence</h1> </mat-card-title >
     <form [formGroup]="form" (ngSubmit)="onSubmit()" >
       <p>
         <mat-form-field appearance="outline" class="w_100">
@@ -52,7 +52,7 @@
         </mat-tab-group>
       </p>
       </div>
-      <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span>Enregistrer <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+      <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span><span *ngIf="competence">Actualiser </span><span *ngIf="!competence">Enregistrer </span><mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
     </form>
   </mat-card>
 </div>

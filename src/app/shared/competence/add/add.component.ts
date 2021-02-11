@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Competence } from 'src/app/models/Competence';
 import { CompetenceService } from './../competence.service';
 import { User } from './../../../models/User';
@@ -23,16 +24,33 @@ export class AddComponent implements OnInit {
   niv3: FormGroup;
   submitted = false;
   busy = false;
-  @Input() userdata: User;
+  @Input() competence: Competence;
 
   constructor(
     private formBuilder: FormBuilder,
-    private competenceService: CompetenceService) {
+    private competenceService: CompetenceService,
+    private route: Router) {
 
   }
 
   ngOnInit(): void {
     this.getRegisterForm();
+
+    if (this.competence){
+      this.setUpdateCompetence();
+    }
+
+  }
+
+  setUpdateCompetence(): void
+  {
+    this.form.patchValue({
+    libelle: this.competence.libelle,
+    descriptif: this.competence.descriptif,
+  });
+  }
+  niveaux(): FormArray{
+    return this.form.get('niveaux') as FormArray;
   }
   getRegisterForm(): void {
 
@@ -45,10 +63,16 @@ export class AddComponent implements OnInit {
   }
 
   getNiveau(i: number): FormGroup {
+    let ce = '';
+    let ga = '';
+    if (this.competence){
+      ce = this.competence.niveaux[i - 1]['critereEvaluation'];
+      ga = this.competence.niveaux[i - 1]['groupeAction'];
 
+    }
     return this.formBuilder.group({
-      critereEvaluation: ['', Validators.required],
-      groupeAction: ['', Validators.required],
+      critereEvaluation: [ce, Validators.required],
+      groupeAction: [ga, Validators.required],
       numero: [i]
     });
   }
@@ -64,26 +88,28 @@ export class AddComponent implements OnInit {
   public get f(): any{
     return this.form.controls;
   }
-  // public get n1(): any {
-  //   return this.niv1.controls;
-  // }
-  // public get n2(): any {
-  //   return this.niv1.controls;
-  // }
-  // public get n3(): any {
-  //   return this.niv3.controls;
-  // }
 
 
   onSubmit(): void
   {
     console.log(this.form.value);
-    this.competenceService.addCompetence(this.form.value as Competence).
-        subscribe( (competence: Competence) => {
-          alert('ajouté avec succès');
-        },
-          error => { console.log(error); }
-        );
+    if (!this.competence){
+      this.competenceService.addCompetence(this.form.value as Competence).
+          subscribe( (competence: Competence) => {
+            this.route.navigate(['/admin/competence/list']);
+          },
+            error => { console.log(error);
+            }
+          );
+    }
+    else {
+      this.competenceService.updateCompetence(this.competence.id, this.form.value as Competence).
+          subscribe( (competence: Competence) => {
+            this.route.navigate(['/admin/competence/list']);
+          },
+            error => { console.log(error); }
+          );
+    }
 
   }
 

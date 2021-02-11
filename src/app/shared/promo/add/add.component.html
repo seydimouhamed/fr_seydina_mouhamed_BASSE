@@ -126,14 +126,14 @@
   <!-- <mat-step [stepControl]="secondFormGroup" label="Fill out your address"> -->
     <app-apprenantpromo (submitEvent)="onSubmit($event)" ></app-apprenantpromo>
   </mat-step>
-  <!-- <mat-step>
+  <mat-step>
     <ng-template matStepLabel>Visualisation</ng-template>
     <p>You are now done.</p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
-  </mat-step> -->
+  </mat-step>
 </mat-horizontal-stepper>
   </mat-card>
 </div>

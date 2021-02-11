@@ -17,6 +17,11 @@ baseUrl = `${environment.apiUrl}admin/grpecompetences`;
     return this.http.get<GrpCompetence[]>(`${this.baseUrl}?archivage=false`);
   }
 
+  getById(id: number): Observable<GrpCompetence>
+  {
+    return this.http.get<GrpCompetence>(`${this.baseUrl}/${id}?archivage=false`);
+  }
+
   addGrpCompetence(data): Observable<any>
   {
     return this.http.post<any>(`${this.baseUrl}`, data);

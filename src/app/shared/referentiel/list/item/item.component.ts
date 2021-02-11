@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit, AfterViewInit {
   critereAdmissions: Array<string>;
   constructor() { }
   ngOnInit(): void {
-    this.critereEvalutions = JSON.parse(this.referentiel.critereAdmission);
+    this.critereEvalutions = JSON.parse(this.referentiel.critereEvaluation);
     this.critereAdmissions = JSON.parse(this.referentiel.critereAdmission);
 
   }

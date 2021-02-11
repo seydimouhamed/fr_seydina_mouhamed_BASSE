@@ -76,35 +76,36 @@
                               <small *ngIf="showDetails">Tags</small>
                       </a>
                       <a mat-list-item class="left">
-                              <mat-icon class="iconc">
+                              <mat-icon class="iconc" aria-hidden="true">
                                       settings
                               </mat-icon>
                               <small *ngIf="showDetails">Paramètres</small>
                       </a>
 
               </div>
-              <div>
+              <!-- <div>
                       <a  mat-list-item class="left">
                               <mat-icon class="iconc" >
                                       account_box
                               </mat-icon>
                               <small *ngIf="showDetails">Se connecter</small>
                       </a>
-              </div>
-              <a mat-list-item  class="left">
-                      <mat-icon class="iconc">
-                              notifications
-                      </mat-icon>
-                      <small *ngIf="showDetails">Notifications</small>
-              </a>
-              <a mat-list-item class="left">
-                      <mat-icon class="iconc">message</mat-icon>
-                      <small *ngIf="showDetails"> Message </small>
-              </a>
-              <a (click)="sidenav.toggle()" mat-list-item>
-                      <mat-icon>close</mat-icon>
-                      <small *ngIf="showDetails"> Close </small>
-              </a>
+                    </div>
+                    <a mat-list-item  class="left">
+                            <mat-icon class="iconc">
+                                    notifications
+                            </mat-icon>
+                            <small *ngIf="showDetails">Notifications</small>
+                    </a>
+                    <a mat-list-item class="left">
+                            <mat-icon class="iconc">message</mat-icon>
+                            <small *ngIf="showDetails"> Message </small>
+                    </a>
+                    <a (click)="sidenav.toggle()" mat-list-item>
+                            <mat-icon>close</mat-icon>
+                            <small *ngIf="showDetails"> Close </small>
+                    </a>
+              -->
           </mat-nav-list>
 
   </mat-sidenav>

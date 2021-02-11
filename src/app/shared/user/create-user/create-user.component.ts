@@ -15,6 +15,7 @@ export class CreateUserComponent implements OnInit {
   hide = false;
   busy = false;
   updateUser = false;
+  avatarUser = '../assets/iconProfils/cm.png';
 
   @Input() userdata: User;
   constructor(
@@ -32,6 +33,10 @@ export class CreateUserComponent implements OnInit {
     if (this.userdata !== undefined)
     {
       this.updateUser = true;
+      if (this.userdata.avatar)
+      {
+        this.avatarUser = 'data:image/jpeg;base64,' + this.userdata.avatar;
+      }
       console.log(this.userdata.profil.id);
       this.registerForm.setValue({
         usernme: this.userdata['usernme'],

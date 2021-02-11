@@ -8,3 +8,16 @@
 .center{
   text-align: center !important;
 }
+
+.color_red{
+  color: red;
+}
+.color_green{
+  color: lime;
+}
+fieldset{
+  height: 200px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 5px;
+}

@@ -3,39 +3,55 @@
 
     <mat-card-title>{{ grpeCompetence.libelle }}</mat-card-title>
     <div>
-      <mat-icon class="color_green">edit</mat-icon>
-      <mat-icon (click)="deleteItem()"  class="color_red">delete</mat-icon>
+    <button mat-mini-fab color="basic" (click)="detailUser(grpeCompetence.id)"> <mat-icon class="color_green">edit</mat-icon></button>
+     <button mat-mini-fab color="basic"><mat-icon (click)="deleteItem()"  class="color_red">delete</mat-icon></button>
     </div>
   </mat-card-header>
 
 <mat-divider></mat-divider>
   <mat-card-content>
-    <p>
+    <fieldset>
+      <legend align="center">DESCRIPTION</legend>
       {{ grpeCompetence.descriptif }}
-    </p>
+    </fieldset>
   </mat-card-content>
 <mat-divider></mat-divider>
   <mat-card-footer>
-    <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="gappx">
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="gappx">
       <div>Compétences</div> <div> <button mat-button (click)="acordeonCompetence.openAll()">+<mat-icon></mat-icon></button></div>
-    </div>
+    </div> -->
     <mat-accordion>
-      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
-        <div class="badge" *ngFor="let competence of grpeCompetence.competences; let i= index">
-           {{ competence['libelle'] }}
-        </div>
-      </div>
-    </mat-accordion>
+
+        <!-- Compétences-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              COMPÉTENCES
+            </mat-panel-title>
+          </mat-expansion-panel-header >
+          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
+            <small class="badge" *ngFor="let competence of grpeCompetence.competences; let i= index">
+              {{ competence['libelle'] }}
+            </small>
+          </div>
+        </mat-expansion-panel>
 <mat-divider></mat-divider>
-    <div>
-      Tags
-    </div>
-    <div>
-      <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="gappx">
-        <div class="badge" *ngFor="let tag of grpeCompetence.tags; let i= index" >
-          {{ tag['libelle'] }}
-        </div>
-      </div>
-    </div>
+
+        <!-- TAGS-->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              TAGS
+            </mat-panel-title>
+          </mat-expansion-panel-header >
+            <div>
+              <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="gappx">
+                <small class="badge" *ngFor="let tag of grpeCompetence.tags; let i= index" >
+                  {{ tag['libelle'] }}
+                </small>
+              </div>
+            </div>
+          </mat-expansion-panel>
+    </mat-accordion>
   </mat-card-footer>
 </mat-card>

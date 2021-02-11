@@ -39,6 +39,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDividerModule,
     MatPaginatorModule,
     MatTabsModule,
+    RouterModule,
 
     HttpClientModule
   ]

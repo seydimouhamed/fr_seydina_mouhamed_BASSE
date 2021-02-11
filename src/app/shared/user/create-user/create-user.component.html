@@ -1,8 +1,8 @@
 <ng-container fxFill fxLayoutAlign="center center" class="red">
   <mat-card class="green form" >
     <mat-card-title ><h1 class="center"> <span *ngIf="!updateUser">Enregistrer </span> <span *ngIf="updateUser">Actualiser </span> un utilisateur</h1> </mat-card-title >
-        <div class="center" >
-          <img src="../assets/iconProfils/cm.png" alt="sa" />
+        <div class="center w_100 ">
+          <img [src]="avatarUser" class="avatar r_rond" alt="sa" />
         </div>
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
           <p>

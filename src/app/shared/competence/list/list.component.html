@@ -12,25 +12,35 @@
                     [pageSizeOptions]="[2, 4, 5, 10]" (page)="pager($event)">
       </mat-paginator>
     </div>
-    <div fxFlex="66">
+    <div fxFlex="62">
       <mat-tab-group *ngIf="currentCompetence" fxFlex="100">
         <mat-tab  *ngFor="let niveau of currentCompetence.niveaux, let i= index" [label]="'Niveau '+ (i+1)+'     '">
           <div>
-            <div fxFlex="50"><h2>Critère d'évaluation</h2>
-                 <div>{{ niveau.critereEvaluation }}</div>
-            </div>
+            <fieldset fxFlex="50">
+              <legend><h3>Critère d'évaluation</h3></legend>
+              <div>{{ niveau.critereEvaluation }}</div>
+            </fieldset>
 
-            <div fxFlex="50"><h2>Groupes d'actions</h2>
-                 <div>{{ niveau.groupeAction }}</div>
-            </div>
+            <fieldset fxFlex="50">
+              <legend><h3>Groupes d'actions</h3></legend>
+              <div>{{ niveau.groupeAction }}</div>
+            </fieldset>
+
           </div>
         </mat-tab>
         <!-- <mat-tab label="Niveau 2"> Content 2 </mat-tab>
         <mat-tab label="NIveau 3"> Content 3 </mat-tab> -->
       </mat-tab-group>
 
-      <div *ngIf="!currentCompetence" fxFill>
-        <h3> Pas de competence selectionnée </h3>
+      <div *ngIf="!currentCompetence" fxFill fxLayout="center center">
+        <h2> Pas de competence selectionnée </h2>
       </div>
     </div>
+    <button  *ngIf="currentCompetence"  mat-stroked-button >
+      <mat-icon class="color_green" (click)="detailUser(currentCompetence.id)">edit</mat-icon>
+    </button>
+    &nbsp;
+    <button mat-stroked-button  *ngIf="currentCompetence" aria-label="delete">
+      <mat-icon class="color_red" (click)="delete(currentCompetence.id)">delete</mat-icon>
+    </button>
 </div>

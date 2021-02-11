@@ -5,7 +5,7 @@
 <br>
   <h1 align="center">Liste des groupe de compétences</h1>
 
-<div fxLayout="row wrap"  fxLayoutAlign="space-around start" fxFlexFill fxLayoutGap="15px" autosize >
+<div fxLayout="row wrap"  fxLayoutAlign="start start" fxFlexFill fxLayoutGap="15px" autosize >
     <app-item fxFlex="32" *ngFor="let grpComp of grpCompetences" [grpeCompetence]="grpComp" (deleteI)='delete($event)' ></app-item>
 </div>
 <mat-paginator [length]="100"

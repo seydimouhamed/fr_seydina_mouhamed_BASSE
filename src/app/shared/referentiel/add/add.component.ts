@@ -138,7 +138,7 @@ getIRIGrpCompetence(): any
       }
       );
     formData.append('critereEvaluation', this.form.value.critereEvaluation);
-    formData.append('critereAdmission', this.form.value.critereEvaluation);
+    formData.append('critereAdmission', this.form.value.critereAdmission);
     formData.append('programme', this.form.value.programme);
 
     this.refService.addReferentiel(formData).

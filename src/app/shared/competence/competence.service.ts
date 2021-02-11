@@ -16,6 +16,10 @@ baseUrl = `${environment.apiUrl}admin/competences`;
     return this.http.get<Competence[]>(`${this.baseUrl}?page=${page}&itemsPerPage=${nbrItemPage}&archivage=false`);
    // return this.http.get<Competence[]>(`${this.baseUrl}?page=${page}&itemsPerPage=${nbrItemPage}&archivage=false`);
   }
+  updateCompetence(id: number, data): Observable<any>
+  {
+    return this.http.put<any>(`${this.baseUrl}/${id}`, data);
+  }
 
   getAllCompetenceResume(): Observable<Competence[]>{
     return this.http.get<Competence[]>(`${this.baseUrl}/resume?itemsPerPage=100&archivage=false`);
@@ -27,5 +31,9 @@ baseUrl = `${environment.apiUrl}admin/competences`;
 
   addCompetence(data): Observable<Competence> {
     return this.http.post<Competence>(`${this.baseUrl}`, data);
+  }
+
+  delete(idComptence: number): Observable<boolean>{
+    return this.http.delete<boolean>(`${this.baseUrl}/${idComptence}`);
   }
 }

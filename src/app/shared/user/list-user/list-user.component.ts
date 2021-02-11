@@ -22,7 +22,7 @@ export class ListUserComponent implements OnInit {
   pageIndex = 0;
   currentProfil = '';
   userOver = false;
-
+  imgMim = null;
 
 //  @Input() profilUser: string;
 
@@ -68,7 +68,7 @@ export class ListUserComponent implements OnInit {
         );
   }
 
-  detailUser(id){
+  detailUser(id): void{
     this.router.navigate(['admin/users/details', id]);
    // alert(id);
   }
@@ -99,11 +99,6 @@ export class ListUserComponent implements OnInit {
           }
         );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        );
       }
     });
 
@@ -154,4 +149,27 @@ export class ListUserComponent implements OnInit {
     this.userOver ? this.userOver = false : this.userOver = true;
    // console.log(this.userOver);
   }
+  guetImageMime(data): any{
+
+    if (data.charAt(0) === '/'){
+      return 'image/jpeg';
+    }else if (data.charAt(0) === 'R'){
+      return 'image/gif';
+    }else if (data.charAt(0) === 'i'){
+      return 'image/png';
+    }else{
+      return null;
+    }
+  }
+
+  // getImg(): any{
+  //   const imageB64 = this.imgMim;
+  //   if (imageB64 !== null){
+  //   const image = 'data:' + this.guetImageMime(imageB64) + ';base64,' + imageB64;
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(image);
+  //   }
+  //   else {
+  //     return null;
+  //   }
+  // }
 }
