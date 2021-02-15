@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Promo } from '@/app/models/Promo';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-item',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-
-  constructor() { }
+  @Input() promo: Promo;
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
   }
-
+  detailsPromo(): void {
+    this.route.navigate(['/admin/promo/details', +this.promo.id]);
+  }
 }

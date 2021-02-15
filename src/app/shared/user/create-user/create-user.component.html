@@ -42,7 +42,7 @@
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Profil</mat-label>
               <mat-select formControlName="idProfil" placeholder="">
-                <mat-option [value]="1">Admin</mat-option>
+                <mat-option [value]="1">User</mat-option>
                 <mat-option [value]="2">Formateur</mat-option>
                 <mat-option [value]="3">CM</mat-option>
               </mat-select>
@@ -58,8 +58,9 @@
               <mat-hint></mat-hint>
             </mat-form-field>
           </p>
-
-            <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span><span *ngIf="updateUser">Actualiser</span> <span *ngIf="!updateUser">Enregistrer</span> <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+          <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="gappx">
+            <button type="submit" mat-raised-button name="connexion" [disabled]="busy" class="primary"><span><span *ngIf="updateUser">Actualiser</span> <span *ngIf="!updateUser">Enregistrer</span> <mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+          </div>
         </form>
   </mat-card>
   </ng-container>

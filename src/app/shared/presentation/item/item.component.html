@@ -1,0 +1,17 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <h1>{{promo.titre}}</h1>
+  </mat-card-header>
+  <img class="avatar_promo" mat-card-image [src]="'data:image/jpeg;base64,'+ promo.avatar" alt="Photo de la promo">
+  <mat-card-content>
+    <p>
+      {{ promo.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+   <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="gappx">
+
+    <button class="primary" mat-mini-fab color="basic" ><mat-icon>launch</mat-icon></button>
+   </div>
+  </mat-card-actions>
+</mat-card>

@@ -9,7 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', component: AdminComponent, children: [
 
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    { path: '', redirectTo: 'promo', pathMatch: 'full'},
     { path: 'dashboard', component: DashboardComponent},
   { path: 'users', loadChildren: () => import('./gestion-utilisateur/gestion-utilisateur.module').then(m => m.GestionUtilisateurModule) },
   { path: 'profilsortie', loadChildren: () => import('src/app/shared/profil-sortie/profil-sortie.module').then(f => f.ProfilSortieModule) },

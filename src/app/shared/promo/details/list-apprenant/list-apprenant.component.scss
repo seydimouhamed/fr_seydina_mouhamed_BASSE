@@ -1,0 +1,30 @@
+table , h1, h2{
+
+  margin-left: 40px;
+}
+ td,th{
+   padding: 10px  !important;
+ }
+ .w_70_h_70
+ {
+     width: 60px;
+     height: 60px;
+     margin-top: 2%;
+     margin-left: 2%;
+     border-radius: 50%;
+ }
+.secondary{
+  color:#338F83 !important;
+}
+.visibleaction{
+  td{
+    .action{
+      display: block;
+    }
+  }
+}
+
+.container{
+  height: 500px;
+  overflow: auto;
+}

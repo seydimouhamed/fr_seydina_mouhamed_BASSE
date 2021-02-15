@@ -1,3 +1,12 @@
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CarteComponent, StatApprenantComponent } from './details/stat-apprenant/stat-apprenant.component';
+import { SummaryComponent } from './details/summary/summary.component';
+import { MaterialModule } from './../../material.module';
+import { DirectiveModule } from './../../@directive/directive.module';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ApprenantpromoComponent } from './apprenantpromo/apprenantpromo.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -10,8 +19,6 @@ import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { FlexModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { PromoRoutingModule } from './promo-routing.module';
 import { ListComponent } from './list/list.component';
@@ -27,11 +34,19 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {DndModule} from '../dnd/dnd.module';
+import { ListApprenantComponent } from './details/list-apprenant/list-apprenant.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
+
 
 
 
 @NgModule({
-  declarations: [ListComponent, ItemComponent, AddComponent, DetailsComponent, PromoComponent, ApprenantpromoComponent],
+  declarations: [ListComponent, ItemComponent,
+    AddComponent, DetailsComponent, PromoComponent,
+    ApprenantpromoComponent, ListApprenantComponent, SummaryComponent, ListApprenantComponent,
+    StatApprenantComponent, CarteComponent],
     imports: [
         CommonModule,
         PromoRoutingModule,
@@ -54,8 +69,15 @@ import {DndModule} from '../dnd/dnd.module';
         MatChipsModule,
         MatAutocompleteModule,
         MatChipsModule,
+        MatListModule,
         DndModule,
-        MatStepperModule
+        MatStepperModule,
+        DirectiveModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatDialogModule,
+        NgxQRCodeModule
     ]
 })
 export class PromoModule { }

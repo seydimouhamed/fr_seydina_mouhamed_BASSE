@@ -1,7 +1,7 @@
 <br>
 <div *ngIf="displayUsers">
   <div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
-    <button mat-raised-button (click)="displayUsers=!displayUsers" class="">ADD NEW USER<mat-icon>add</mat-icon></button>
+    <button mat-raised-button (click)="displayUsers=!displayUsers" class="primary">ADD NEW USER<mat-icon>add</mat-icon></button>
   </div>
     <div fxLayout="row"  fxLayoutGap="gappx" fxFlexFill autosize>
         <app-list-profil fxFlex="20">v</app-list-profil>
@@ -11,7 +11,7 @@
 <div *ngIf="!displayUsers" >
   <br>
   <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-    <button mat-raised-button (click)="displayUsers=!displayUsers" ><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button mat-raised-button (click)="displayUsers=!displayUsers" class="primary"><mat-icon>keyboard_arrow_left</mat-icon></button>
     <h2>Ajouter un nouveau utilisateur</h2>
     <h2>&nbsp;</h2>
   </div>

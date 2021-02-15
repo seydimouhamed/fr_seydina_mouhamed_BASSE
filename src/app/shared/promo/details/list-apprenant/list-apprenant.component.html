@@ -1,0 +1,50 @@
+<h1>Liste des apprenants</h1>
+<h2>{{dataSource.data.length}} Apprenant(s)</h2>
+<div>
+<div class="container">
+<table mat-table [dataSource] = "dataSource" class=" mat-elevation-z2">
+
+  <!-- Checkbox Column -->
+
+
+
+  <!-- avatar Column -->
+  <ng-container matColumnDef="avatar" >
+    <th mat-header-cell *matHeaderCellDef> &nbsp; </th>
+    <td mat-cell *matCellDef="let element">
+      <img class="w_70_h_70" [src]="'data:image/jpeg;base64,'+ element.avatar" alt="pr">
+    </td>
+    <td mat-footer-cell *matFooterCellDef> &nbsp; </td>
+    <!-- <td mat-cell *matCellDef="let element"><img class="w_70_h_70" src="/assets/iconProfils/{{element.libelle | lowercase }}.png" alt="pr"></td> -->
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Apprenants </th>
+    <!-- <td mat-cell *matCellDef="let element"  (dblclick)="toInput(element.id)" ><input matInput (keydown.enter)="onBlurInput(element.id,element.libelle)" (blur)="onBlurInput(element.id,element.libelle)" #input{{element.id}} [readonly]="!editable" type="text" value="{{element.libelle}}" ></td> -->
+    <td  mat-cell *matCellDef="let element" ><h3>{{ element.firstname}}&nbsp;{{ element.lastname}}</h3>   <small>{{element.email}}</small></td>
+    <td mat-footer-cell *matFooterCellDef>
+      &nbsp;
+    </td>
+  </ng-container>
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp; </th>
+    <td mat-cell *matCellDef="let element">
+      <div class="action">
+        <button mat-mini-fab color="basic" (click)="sendMessage(element.id)"  class="secondary"> <mat-icon class="color_green">sms</mat-icon></button>
+      </div>
+    </td>
+    <td mat-footer-cell *matFooterCellDef>
+      &nbsp;
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row appShadowOver *matRowDef="let row;columns: displayedColumns;" (dblclick)="displayDetails(row)">
+  </tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+</table>
+</div>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+</div>

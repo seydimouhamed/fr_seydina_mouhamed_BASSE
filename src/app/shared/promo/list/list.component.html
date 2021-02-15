@@ -1,1 +1,3 @@
-<p>list works!</p>
+<div fxLayout="row wrap" fxFlexFill fxLayoutAlign="center center">
+  <app-item *ngFor="let promo of sumPromos" fxFlex="60" [promo]="promo"></app-item>
+</div>

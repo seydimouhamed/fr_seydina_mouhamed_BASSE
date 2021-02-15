@@ -1,1 +1,5 @@
-<p>details works!</p>
+<app-summary [promo]="promo"></app-summary>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
+ <app-list-apprenant fxFlex="30"[users]="users" (newUser)="getCurrentUser($event)"></app-list-apprenant>
+  <app-stat-apprenant fxFill="70" [apprenant]=currentUser></app-stat-apprenant>
+</div>

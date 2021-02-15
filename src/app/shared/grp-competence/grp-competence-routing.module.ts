@@ -11,7 +11,7 @@ const routes: Routes = [
     {path: 'add', component: AddComponent},
     {path: 'details/:id', component: DetailComponent, resolve: { grpCompetence: GrpCompetenceResolverService}},
     {path: 'list', component: ListComponent},
-    {path: '', component: AddComponent},
+    {path: '', component: ListComponent},
   ]},
 ];
 

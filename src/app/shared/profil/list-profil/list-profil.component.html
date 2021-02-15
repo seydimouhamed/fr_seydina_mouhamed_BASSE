@@ -41,7 +41,7 @@
     <td  mat-cell *matCellDef="let element" >{{element.libelle}}</td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row appShadowOver *matRowDef="let row; columns: displayedColumns;" (click)="displayUsers(row)">
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="primary"></tr>
+  <tr mat-row appShadowOver *matRowDef="let row; columns: displayedColumns;" (click)="displayUsers(row)" [ngClass]="{'primary': row == currentprofil}">
   </tr>
 </table>

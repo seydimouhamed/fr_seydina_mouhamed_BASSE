@@ -1,3 +1,4 @@
+import { AdminPromoService } from './../admin-promo.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,6 +11,7 @@ export class GeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

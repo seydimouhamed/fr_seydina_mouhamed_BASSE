@@ -24,4 +24,8 @@ export class PromoService {
     {
       return this.http.get<Promo>(`${this.baseUrl}/${id}`);
     }
+    getPromoPrincipal(id: number): Observable<Promo>
+    {
+      return this.http.get<Promo>(`${this.baseUrl}/${id}/principal`);
+    }
 }

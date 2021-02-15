@@ -1,0 +1,19 @@
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+  <div fxFlex="30">
+    <img width="100%" height='100%' class="img_promo" src="../assets/img/logo-SA3.png"/>
+  </div>
+  <div fxFlex="30"align='center'>
+    <div>Cohorte</div>
+    <h1  class="secondary"> {{ promo.titre  }}</h1>
+    <mat-divider></mat-divider>
+    <p>{{promo.description }}</p>
+  </div>
+  <div  fxFlex="30">
+    <mat-list role="list">
+      <mat-list-item role="listitem"><mat-icon class="secondary">event</mat-icon>&nbsp;Du {{promo.dateDebut}} au {{promo.dateFinPro}} </mat-list-item>
+      <mat-list-item role="listitem"><mat-icon class="secondary">place</mat-icon>&nbsp; {{promo.lieu}}</mat-list-item>
+      <mat-list-item role="listitem"><mat-icon class="secondary">people</mat-icon>  &nbsp; 32 apprenant(s)</mat-list-item>
+    </mat-list>
+  </div>
+ </div>

@@ -1,0 +1,51 @@
+
+<div fxFlex="100" class="container">
+  <h1>
+    &nbsp;
+  </h1>
+  <br>
+  <mat-card fxFlex="70" class="div-stat">
+    <div *ngIf="!apprenant" class="vide" fxLayout="row" fxLayoutAlign="center center" >
+      <h1>Aucun apprenant Sélectionné</h1>
+    </div>
+    <div *ngIf="apprenant" >
+     <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+       <div>
+         <h2>{{apprenant.firstname}} &nbsp; {{apprenant.lastname}}</h2>
+       </div>
+        <div>
+          <button  mat-mini-fab color="basic"  class="primary"  (click)="openCarte()"><mat-icon>file_copy</mat-icon></button>
+          &nbsp;<button  mat-mini-fab color="basic" (click)="sendSms()" class="primary" ><mat-icon>sms</mat-icon></button>
+        </div>
+      </div>
+      <br>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+        <div class="mat-elevation-z4 mg-1">
+          <img class="mat-elevation-z4" [width]="164" [height]="164" [src]="'data:image/jpeg;base64,'+ apprenant.avatar"/>
+        </div>
+        <div>
+          <mat-list role="list">
+            <mat-list-item role="listitem">Telephone : {{apprenant.telephone}}</mat-list-item>
+            <mat-list-item role="listitem">Email : {{ apprenant.email}}</mat-list-item>
+            <mat-list-item role="listitem">Adresse :{{apprenant.adresse}}</mat-list-item>
+          </mat-list>
+        </div>
+        <div>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+        </div>
+
+        <div>
+          <ngx-qrcode class="mat-elevation-z4"
+            [elementType]="elementType"
+            [errorCorrectionLevel]="correctionLevel"
+            [value]="value"
+            cssClass="bshadow">
+          </ngx-qrcode>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+

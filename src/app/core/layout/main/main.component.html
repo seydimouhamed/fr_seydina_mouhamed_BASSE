@@ -38,11 +38,17 @@
                               </mat-icon>
                               <small *ngIf="showDetails">Profil Sortie</small>
                       </a>
-                      <a mat-list-item [routerLink]= "currentProfil + '/grpCompetence'" routerLinkActive='active' class="left">
+                      <a mat-list-item [routerLink]= "currentProfil + '/competence'" routerLinkActive='active' class="left">
                               <mat-icon class="iconc">
-                                      ballot
+                                assignment
                               </mat-icon>
                               <small *ngIf="showDetails">Compétences</small>
+                      </a>
+                      <a mat-list-item [routerLink]= "currentProfil + '/grpCompetence'" routerLinkActive='active' class="left">
+                              <mat-icon class="iconc">
+                                library_books
+                              </mat-icon>
+                              <small *ngIf="showDetails">G. Compétences</small>
                       </a>
                       <a mat-list-item  [routerLink]= "currentProfil + '/referentiel'" routerLinkActive='active' class="left">
                               <mat-icon class="iconc">
@@ -50,9 +56,9 @@
                               </mat-icon>
                               <small *ngIf="showDetails">Référentiels</small>
                       </a>
-                      <a mat-list-item [routerLink]= "currentProfil + '/competence'" routerLinkActive='active' class="left">
+                      <a mat-list-item routerLinkActive='active' class="left">
                               <mat-icon class="iconc">
-                                      assignment
+                                      ballot
                               </mat-icon>
                               <small *ngIf="showDetails">Briefs</small>
                       </a>

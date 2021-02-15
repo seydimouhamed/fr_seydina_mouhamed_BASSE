@@ -2,7 +2,7 @@
 
 <br>
   <div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
-    <a mat-raised-button routerLink= './../add' class="">ADD NEW<mat-icon>add</mat-icon></a>
+    <a mat-raised-button routerLink= './../add' class="primary">ADD NEW<mat-icon>add</mat-icon></a>
   </div>
 <br>
   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx" >
@@ -48,7 +48,7 @@
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row appShadowOver *matRowDef="let row; columns: displayedColumns;" (click)="displayPsUser(row.id)">
+          <tr mat-row appShadowOver *matRowDef="let row; columns: displayedColumns;" (click)="displayPsUser(row)" [ngClass]="{'primary': row == currentprofil}">
           </tr>
         </table>
     </div>

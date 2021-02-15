@@ -14,6 +14,7 @@ import { ProfilSortieService } from '../profil-sortie.service';
 export class ListComponent implements OnInit {
 
   profils: ProfilSortie[];
+  currentprofil: ProfilSortie;
   error = '';
   editable = false;
 
@@ -30,8 +31,9 @@ export class ListComponent implements OnInit {
 
   }
 
-  displayPsUser(idPs): void{
-    this.profilService.currentPsSubject.next(idPs);
+  displayPsUser(row): void{
+    this.currentprofil = row as ProfilSortie;
+    this.profilService.currentPsSubject.next(row.id);
    }
 
   getProfils(): void

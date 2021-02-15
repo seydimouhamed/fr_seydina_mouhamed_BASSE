@@ -1,7 +1,6 @@
 <br>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-  <a mat-raised-button routerLink= '/admin/competence/list' class=""><mat-icon>keyboard_arrow_left</mat-icon></a>
-  <h2>&nbsp;</h2>
+  <a mat-raised-button routerLink= '/admin/competence/list' class="primary"><mat-icon>keyboard_arrow_left</mat-icon></a>
   <h2>&nbsp;</h2>
 </div>
 <br><br>
@@ -52,7 +51,9 @@
         </mat-tab-group>
       </p>
       </div>
-      <button type="submit" mat-raised-button name="connexion" [disabled]="busy"><span><span *ngIf="competence">Actualiser </span><span *ngIf="!competence">Enregistrer </span><mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+      <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="gappx">
+        <button type="submit" mat-raised-button name="connexion" [disabled]="busy" class="primary"><span><span *ngIf="competence">Actualiser </span><span *ngIf="!competence">Enregistrer </span><mat-spinner *ngIf="busy" diameter='20'color='warn'></mat-spinner></span></button>
+      </div>
     </form>
   </mat-card>
 </div>

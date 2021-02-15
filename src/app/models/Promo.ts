@@ -7,6 +7,7 @@ export class Promo{
   status: string;
   avatar: any;
   titre: string;
+  lieu: string;
   critereevaluation: string;
   dateDebut: Date;
   dateFinPro: Date;

@@ -1,9 +1,10 @@
 <br>
 <div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
-  <a mat-raised-button routerLink= './../add' class="">ADD NEW<mat-icon>add</mat-icon></a>
+  <a mat-raised-button class="primary neutre" routerLink= './../add'>ADD NEW<mat-icon>add</mat-icon></a>
 </div>
 <br>
 <div fxLayout="row wrap"  fxLayoutAlign="space-around start" fxFlexFill fxLayoutGap="15px" autosize >
     <app-item fxFlex="100" *ngFor="let ref of referentiels;let i=index" [referentiel]="ref" [index]="i" (deleteI)="delete($event)"></app-item>
 
 </div>
+ <div  fxLayout="row" fxLayoutAlign="center center"><button class="primary neutre" mat-raised-button  fxFlex="30">VOIR PLUS <mat-icon class="neutre">visibility</mat-icon></button></div>

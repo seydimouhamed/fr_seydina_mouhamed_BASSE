@@ -1,12 +1,12 @@
 <br>
 <div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
-  <a mat-raised-button routerLink= './../add' class="">ADD NEW<mat-icon>add</mat-icon></a>
+  <a mat-raised-button routerLink= './../add' class="primary">ADD NEW<mat-icon>add</mat-icon></a>
 </div>
 <br>
-<div class="center"> <h2 > Liste des compétences</h2></div>
+<div class="center"> <h1 > Liste des compétences</h1></div>
 <div fxLayout="row"  fxLayoutAlign="space-around start" fxFlexFill fxLayoutGap="15px" autosize >
     <div fxFlex="33" fxLayout="column"fxLayoutGap="5px" class="mgl-5">
-      <button mat-raised-button *ngFor="let c of competences" (click)="selectCompetence(c)"><h4>{{c.libelle}}</h4></button>
+      <button mat-raised-button *ngFor="let c of competences" (click)="selectCompetence(c)" [ngClass]="{'primary': currentCompetence==c}"><h3 class="p-tb-5">{{c.libelle}}</h3></button>
       <mat-paginator [length]="nbrItem"
                     [pageSize]="nbrItemPage"
                     [pageSizeOptions]="[2, 4, 5, 10]" (page)="pager($event)">
@@ -17,12 +17,12 @@
         <mat-tab  *ngFor="let niveau of currentCompetence.niveaux, let i= index" [label]="'Niveau '+ (i+1)+'     '">
           <div>
             <fieldset fxFlex="50">
-              <legend><h3>Critère d'évaluation</h3></legend>
+              <legend align="center"><h3>Critère d'évaluation</h3></legend>
               <div>{{ niveau.critereEvaluation }}</div>
             </fieldset>
 
             <fieldset fxFlex="50">
-              <legend><h3>Groupes d'actions</h3></legend>
+              <legend align="center"><h3>Groupes d'actions</h3></legend>
               <div>{{ niveau.groupeAction }}</div>
             </fieldset>
 
@@ -36,11 +36,11 @@
         <h2> Pas de competence selectionnée </h2>
       </div>
     </div>
-    <button  *ngIf="currentCompetence"  mat-stroked-button >
+    <button  *ngIf="currentCompetence"  mat-mini-fab color="basic"  >
       <mat-icon class="color_green" (click)="detailUser(currentCompetence.id)">edit</mat-icon>
     </button>
     &nbsp;
-    <button mat-stroked-button  *ngIf="currentCompetence" aria-label="delete">
+    <button mat-mini-fab color="basic"  *ngIf="currentCompetence" aria-label="delete">
       <mat-icon class="color_red" (click)="delete(currentCompetence.id)">delete</mat-icon>
     </button>
 </div>

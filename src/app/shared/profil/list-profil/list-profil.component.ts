@@ -14,7 +14,7 @@ export class ListProfilComponent implements OnInit {
   error = '';
   editable = false;
 
-
+ currentprofil: Profil;
   displayedColumns: string[] = ['select', 'id', 'avatar', 'libelle'];
   dataSource: any;
   selection = new SelectionModel<Profil>(true, []);
@@ -28,6 +28,7 @@ export class ListProfilComponent implements OnInit {
   }
 
   displayUsers(row): void{
+    this.currentprofil = row as Profil;
     this.profilService.currentProfilSubject.next(row.libelle);
     // alert(row.libelle);
   }
