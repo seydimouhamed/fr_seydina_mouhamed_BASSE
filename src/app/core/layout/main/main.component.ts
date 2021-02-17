@@ -71,11 +71,12 @@ export class MainComponent implements OnInit {
     toggleTheme(): void {
       this.isDark = !this.isDark;
       if (this.isDark) {
-        this.overlayContainer.getContainerElement().classList.add('altTheme');
+        // alert("dark");
+        this.overlayContainer.getContainerElement().classList.add('dark-theme');
       } else {
         this.overlayContainer
           .getContainerElement()
-          .classList.remove('altTheme');
+          .classList.remove('dark-theme');
       }
     }
 }

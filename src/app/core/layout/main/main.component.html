@@ -1,8 +1,9 @@
 
 <div >
-  <mat-sidenav-container fxFlexFill autosize >
-    <mat-sidenav #sidenav [mode]="mode" [opened]="isAuth" (mouseenter) ="showDetail()" style="background-color:#fff" (mouseleave)="closeDetail()" >
-                <div  fxLayout="row" fxLayoutAlign="space-around center" style="background-color : #fff;color :#000000;padding: 7px;">
+  <mat-sidenav-container fxFlexFill autosize [class.dark-theme]="isDark">
+    <mat-sidenav #sidenav [mode]="mode" [opened]="isAuth" (mouseenter) ="showDetail()" (mouseleave)="closeDetail()" >
+      <div  fxLayout="row" fxLayoutAlign="space-around center" style="padding: 7px;">
+        <!-- <div  fxLayout="row" fxLayoutAlign="space-around center" style="background-color : #fff;color :#000000;padding: 7px;"> -->
                         <img src="../assets/img/logo-sm.png" alt="sa"/>
 
                         <em  *ngIf="showDetails"  class="iconc" > SUIVI</em>
@@ -122,9 +123,9 @@
                 </div>
     </mat-sidenav>
 
-    <mat-sidenav-content autosize [class.altTheme]="isDark">
+    <mat-sidenav-content autosize [class.dark-theme]="isDark">
         <!-- toolbar -->
-        <mat-toolbar *ngIf="isAuth" style="z-index: 1000; min-height: 40px !important; height: 30px !important;background-color : #fff;" class="sticky"  [color]="themeColor" class="mat-elevation-z4 topo" [style.margin-bottom]="'4px'">
+        <mat-toolbar *ngIf="isAuth" style="z-index: 1000; min-height: 40px !important; height: 30px !important;" class="sticky" class="mat-elevation-z4 topo" [style.margin-bottom]="'4px'">
             <mat-toolbar-row >
                 <button mat-icon-button (click)="sidenav.toggle()" fxShow="true">
                             <mat-icon  class="iconc">menu</mat-icon>
@@ -153,7 +154,7 @@
             </mat-toolbar-row>
         </mat-toolbar>
         <!-- <div class="float color_green h90" > -->
-          <div class="float color_green h90" >
+          <div class="float h90" >
                         <div class="float">
                         <router-outlet></router-outlet>
 

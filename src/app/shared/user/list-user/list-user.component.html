@@ -68,7 +68,7 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="primary"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
   <tr mat-row appShadowOver appComponentAction class="visibleprofil" *matRowDef="let row; columns: displayedColumns;" [id]="'id_'+row.id" (dblclick)="detailUser(row.id)" (mouseenter) ="setUserOver(row.id) " (mouseleave) ="setUserOver(row.id)" matRipple >
   </tr>
 </table>
