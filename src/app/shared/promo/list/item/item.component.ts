@@ -10,6 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ItemComponent implements OnInit {
   @Input() promo: Promo;
+  urlavatar = '../assets/img/logo-SA3.png';
   constructor(private route: Router) { }
 
   ngOnInit(): void {

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ProfilSortie } from './../profil-sortie';
 import { UserService } from './../../user/user.service';
@@ -18,18 +19,19 @@ export class ListPsUserComponent implements OnInit {
   users: User[];
   error = '';
   editable = false;
-  nombreItemPage = 20;
+  nombreItemPage = 5;
   nbrItems: number;
   pageIndex = 1;
   idCurrentPs = 2;
 
+  name = 'seydina';
 //  @Input() profilUser: string;
 
   profilUser = '';
 
   pageEvent: PageEvent;
 
-  displayedColumns: string[] = ['avatar', 'nom', 'email', 'telephone'];
+  displayedColumns: string[] = ['avatar', 'nom', 'email', 'telephone', 'action'];
   dataSource: any;
   selection = new SelectionModel<User>(true, []);
 
@@ -60,7 +62,7 @@ export class ListPsUserComponent implements OnInit {
   updateUsers(): void{
     // page = 1, nbrItemPage = 5, profil= 'CM'
 
-    this.psService.getUsers(this.idCurrentPs,this.pageIndex, this.nombreItemPage)
+    this.psService.getUsers(this.idCurrentPs, this.pageIndex, this.nombreItemPage)
         .subscribe(
           users => {
             this.users = users['hydra:member'];
@@ -69,7 +71,7 @@ export class ListPsUserComponent implements OnInit {
         );
   }
 
-  detailUser(id){
+  detailUser(id): void{
     this.router.navigate(['admin/users/details', id]);
    // alert(id);
   }
@@ -86,12 +88,39 @@ export class ListPsUserComponent implements OnInit {
                 this.users = users['hydra:member'];
                 this.nbrItems = users['hydra:totalItems'];
                 this.dataSource = new MatTableDataSource<User>(this.users);
-                console.log(users);
+               //  console.log(users);
             },
               error => { this.error = error; }
               );
   }
 
+  dissocierUser(row): void{
+    // alert(row);
+    Swal.fire({
+      title: 'Vous etes sur de vouloir Enlever',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.value) {
+        this.userService.deleteAppPS(+row.id).
+            subscribe(
+              () => {
 
+              this.dataSource.data.splice(this.users.indexOf(row), 1);
+              this.dataSource._updateChangeSubscription();
+              this.nbrItems = this.nbrItems - 1;
+               // this.grpCompetences.splice(+id, 1);
+              Swal.fire (
+                'Supprimé avec succes',
+                '',
+                'success'
+               );
+              }
+            );
+      }
+    });
+  }
 
 }

@@ -8,19 +8,31 @@
         class="example-list"
         cdkDropListSortingDisabled
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of apprenantAjoutes" cdkDrag>{{item.email}}</div>
+        <div class="example-box" *ngFor="let item of apprenantAjoutes" cdkDrag>
+          {{item.firstname}}&nbsp;{{item.lastname}}<small>{{item.email}}</small>
+
+        </div>
+      </div>
+      <h1>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+      </h1>
+      <div>
+        <button mat-raised-button color="primary" (click)="validAdd()">Enregister</button>
       </div>
     </div>
 
     <div class="example-container">
       <h2>Autres apprenants</h2>
-
       <div
         cdkDropList
         [cdkDropListData]="apprenantLists"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of apprenantLists" cdkDrag>{{item.email}}</div>
+        <div class="example-box" *ngFor="let item of apprenantLists" cdkDrag>
+          {{item.firstname}}&nbsp;{{item.lastname}}<small>{{item.email}}</small>
+        </div>
       </div>
     </div>
-  </div>
+</div>

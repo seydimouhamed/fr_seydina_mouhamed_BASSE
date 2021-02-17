@@ -26,7 +26,11 @@
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <!-- <td mat-cell *matCellDef="let element"> <img class="w_70_h_70" src="/assets/iconProfils/admin.png" alt="pr"> </td> -->
-    <td mat-cell *matCellDef="let element"> <img class="w_70_h_70" [src]="'data:image/jpeg;base64,'+ element.avatar" alt="pr"> </td>
+    <td mat-cell *matCellDef="let element">
+      <img class="w_70_h_70" *ngIf="element.avatar" [src]="'data:image/jpeg;base64,'+ element.avatar" alt="pr">
+      <img class="w_70_h_70" *ngIf="!element.avatar" [src]="'../assets/iconProfils/apprenant.png'" alt="pr">
+    </td>
+    <td mat-cell *matCellDef="let element">  </td>
 
   </ng-container>
 

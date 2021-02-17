@@ -35,4 +35,15 @@ export class UserService {
     const URL = `${this.baseUrl}/${id}`;
     return this.http.delete<any>(URL);
   }
+  deleteAppPS(id): any
+  {
+    const URL = `${environment.apiUrl}apprenants/${id}/profilsortie`;
+    return this.http.delete<any>(URL);
+  }
+
+  getApprentLessPs(page = 1): Observable<any>
+  {
+    const URL = `${environment.apiUrl}apprenants?exists[profilSortie]=false&archivage=false&itemsPerPage=10&page=${page}`;
+    return this.http.get<any>(URL);
+  }
 }

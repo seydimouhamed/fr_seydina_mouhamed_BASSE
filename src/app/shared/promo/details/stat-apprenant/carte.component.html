@@ -37,7 +37,8 @@
               &nbsp;
             </div>
             <div class="mat-elevation-z4 mg-1">
-              <img class="mat-elevation-z4" [width]="164" [height]="164" [src]="'data:image/jpeg;base64,'+ apprenant.avatar"/>
+              <img class="mat-elevation-z4" *ngIf="apprenant.avatar" [width]="164" [height]="164" [src]="'data:image/jpeg;base64,'+ apprenant.avatar"/>
+              <img class="mat-elevation-z4" *ngIf="!apprenant.avatar" [width]="164" [height]="164" [src]="'../assets/iconProfils/apprenant.png'"/>
             </div>
           </div>
           <div>

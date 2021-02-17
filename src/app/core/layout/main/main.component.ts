@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/features/auth/auth.service';
 import { getType } from '@angular/flex-layout/extended/typings/style/style-transforms';
 import { navigation } from 'src/app/config/navigation.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-main',
@@ -20,9 +21,14 @@ export class MainComponent implements OnInit {
   currentProfil = '';
 
   navigation$ = navigation;
-  // navebar
+  // theming
+  themeColor: 'primary' | 'accent' | 'warn' = 'primary'; // ? notice this
+  isDark = false;
 
-    constructor(private authService: AuthService, private router: Router) {
+    constructor(
+      private authService: AuthService,
+      private router: Router,
+      private overlayContainer: OverlayContainer) {
 
       this.authService.currentUser.subscribe(
         (user: User) => {
@@ -60,5 +66,16 @@ export class MainComponent implements OnInit {
         {
           this.router.navigate(['/auth']);
         }
+    }
+
+    toggleTheme(): void {
+      this.isDark = !this.isDark;
+      if (this.isDark) {
+        this.overlayContainer.getContainerElement().classList.add('altTheme');
+      } else {
+        this.overlayContainer
+          .getContainerElement()
+          .classList.remove('altTheme');
+      }
     }
 }

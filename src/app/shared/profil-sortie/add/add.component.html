@@ -1,37 +1,26 @@
 <br>
 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-  <a mat-raised-button routerLink= '/admin/profilsortie/list' class="primary"><mat-icon>keyboard_arrow_left</mat-icon></a>
+  <a mat-raised-button routerLink= '/admin/profilsortie' class="primary"><mat-icon>keyboard_arrow_left</mat-icon></a>
 </div>
 <br>
 <h2 align='center'>Créer un profil de sortie</h2>
 <mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <mat-step [stepControl]="form">
+    <form [formGroup]="form">
       <ng-template matStepLabel>Libelle profil de sortie</ng-template>
       <mat-form-field>
-        <mat-label>Libelle</mat-label>
-        <input matInput placeholder="Libelle" formControlName="firstCtrl" required>
+        <mat-label>Nom profil</mat-label>
+        <input matInput placeholder="Nom profil" formControlName="libelle" required>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Suivant</button>
+        <button mat-raised-button color="primary" matStepperNext>Suivant</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" label="Affecter ce profils de sortie à des apprenants">
-    <form [formGroup]="secondFormGroup">
-      <div>
-        <button mat-button matStepperPrevious>Retour</button>
-        <button mat-button matStepperNext>Suivant</button>
-      </div>
-      <app-dndapprenant [apprenant$]="listApprenant"></app-dndapprenant>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Valider</ng-template>
-    <p>Ajouter avec succès</p>
+  <mat-step  label="Affecter ce profils de sortie à des apprenants">
     <div>
-      <button mat-button matStepperPrevious>Retour</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary"  matStepperPrevious>Retour</button>
     </div>
+      <app-dndapprenant [apprenant$]="listApprenant" (emitApprenants)="onValidate($event)"></app-dndapprenant>
   </mat-step>
 </mat-horizontal-stepper>

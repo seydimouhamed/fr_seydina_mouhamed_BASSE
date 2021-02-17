@@ -1,3 +1,4 @@
+import { MaterialModule } from './../../material.module';
 import {  } from '@angular/cdk';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   declarations: [DndapprenantComponent],
   imports: [
     CommonModule,
-    DragDropModule
+    DragDropModule,
+    MaterialModule
   ],
   exports: [
     DndapprenantComponent

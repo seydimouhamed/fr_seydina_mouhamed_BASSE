@@ -30,12 +30,17 @@ export class ProfilSortieService {
   }
 
   getProfilSorties(): Observable<ProfilSortie[]> {
-    return this.http.get<ProfilSortie[]>(this.baseUrl);
+    return this.http.get<ProfilSortie[]>(`${this.baseUrl}?itemsPerPage=20&archivage=false`);
   }
   addProfilSortie(profil: ProfilSortie): Observable<ProfilSortie>{
     return this.http.post<ProfilSortie>(this.baseUrl, profil);
   }
-  updateProfilSortie(profil: ProfilSortie): Observable<ProfilSortie>{
-    return this.http.put<ProfilSortie>(`${this.baseUrl}/${profil.id}`, profil);
+  updateProfilSortie(id, data): Observable<ProfilSortie>{
+    return this.http.put<ProfilSortie>(`${this.baseUrl}/${id}`, data);
+  }
+
+  delete(id: number): Observable<any>{
+
+    return this.http.delete<any>(`${this.baseUrl}/${id}`);
   }
 }

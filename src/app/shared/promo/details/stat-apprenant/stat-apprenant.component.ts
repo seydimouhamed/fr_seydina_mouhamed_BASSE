@@ -70,18 +70,17 @@ value = 'https://www.techiediaries.com/';
     console.log(this.apprenant);
   }
   ngOnChanges(changes): void {
-    if (changes.apprenant){
+    if (changes.apprenant && this.apprenant !== undefined){
 
-    const dataUser = {
-      id: this.apprenant.id,
-      // prenom: this.apprenant.firstname,
-      // nom: this.apprenant.lastname,
-      // telephone: this.apprenant.telephone,
-      // email: this.apprenant.email,
-      username: this.apprenant.username
-      }
-    ;
-     this.value = btoa(btoa(JSON.stringify(dataUser)));
+      const dataUser = {
+        id: this.apprenant.id,
+        // prenom: this.apprenant.firstname,
+        // nom: this.apprenant.lastname,
+        // telephone: this.apprenant.telephone,
+        // email: this.apprenant.email,
+        username: this.apprenant.username
+        };
+      this.value = btoa(btoa(JSON.stringify(dataUser)));
     }
 
   }

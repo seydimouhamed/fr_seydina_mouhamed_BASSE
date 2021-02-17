@@ -1,5 +1,5 @@
 import { User } from 'src/app/models/User';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -11,21 +11,9 @@ export class DndapprenantComponent implements OnInit, OnChanges {
 
   apprenantAjoutes: User[];
   apprenantLists: User[];
-
+  tab: string[];
   @Input() apprenant$;
-  items = [
-  ];
-
-  basket = [
-    'Oranges',
-    'Bananas',
-    'Cucumbers',
-    'Carrots',
-    'Tomatoes',
-    'Onions',
-    'Apples',
-    'Avocados'
-  ];
+  @Output() emitApprenants = new EventEmitter();
 
   drop(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
@@ -41,8 +29,8 @@ export class DndapprenantComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
   }
-  ngOnChanges(): void {
-    if (this.apprenant$ !== undefined){
+  ngOnChanges(changes): void {
+    if (changes.apprenant$){
       this.apprenantLists = this.apprenant$;
       this.apprenantAjoutes = [];
       // console.log(this.apprenant$);
@@ -50,5 +38,19 @@ export class DndapprenantComponent implements OnInit, OnChanges {
       //     this.apprenantLists.push(apprenants);
       // });
     }
+  }
+
+  validAdd(): void
+  {
+    // console.log(this.getIriApprenant());
+    this.emitApprenants.emit(this.getIriApprenant());
+  }
+
+  getIriApprenant(): string[]
+  { this.tab = [];
+    this.apprenantAjoutes.forEach(app => {
+      this.tab.push('/api/apprenants/' + app.id);
+    });
+    return this.tab;
   }
 }

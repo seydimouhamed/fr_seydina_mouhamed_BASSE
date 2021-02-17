@@ -9,11 +9,19 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+// Custom theme and custom component theme.
+@import "./theme.scss";                     // changer
+@import "./custom-components-theme.scss";   // changer
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $frfront-primary: mat-palette($mat-indigo);
 $frfront-accent: mat-palette($mat-pink, A200, A100, A400);
+
+@include angular-material-theme($theme);  // ? changed
+@include custom-components-theme($theme); // ? changed
+
 
 // The warn palette is optional (defaults to red).
 $frfront-warn: mat-palette($mat-red);
@@ -31,8 +39,10 @@ $frfront-theme: mat-light-theme((
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($frfront-theme);
-
+// @include angular-material-theme($frfront-theme);
+.dark-theme {
+  @include angular-material-color($altTheme);
+}
 /* You can add global styles to this file, and also import other style files */
 
 

@@ -1,3 +1,5 @@
+import { InlineEditModule } from './../inline-edit/inline-edit.module';
+import {  RouterModule } from '@angular/router';
 import { DndapprenantModule } from './../dndapprenant/dndapprenant.module';
 import { ProfilSortieRoutingModule } from './profil-sortie-routing.module';
 import { NgModule } from '@angular/core';
@@ -30,6 +32,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     DndapprenantModule,
     // import dnd module
     CommonModule,
+    RouterModule,
     MatFormFieldModule,
     MatIconModule,
     MatStepperModule,
@@ -42,7 +45,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     UserModule,
     MatPaginatorModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InlineEditModule
   ],
 })
 export class ProfilSortieModule { }

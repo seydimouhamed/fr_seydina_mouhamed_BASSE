@@ -12,7 +12,8 @@
   <ng-container matColumnDef="avatar" >
     <th mat-header-cell *matHeaderCellDef> &nbsp; </th>
     <td mat-cell *matCellDef="let element">
-      <img class="w_70_h_70" [src]="'data:image/jpeg;base64,'+ element.avatar" alt="pr">
+      <img class="w_70_h_70" *ngIf="element.avatar" [src]="'data:image/jpeg;base64,'+ element.avatar" alt="pr">
+      <img class="w_70_h_70" *ngIf="!element.avatar" [src]="'../assets/iconProfils/apprenant.png'" alt="pr">
     </td>
     <td mat-footer-cell *matFooterCellDef> &nbsp; </td>
     <!-- <td mat-cell *matCellDef="let element"><img class="w_70_h_70" src="/assets/iconProfils/{{element.libelle | lowercase }}.png" alt="pr"></td> -->

@@ -2,7 +2,10 @@
   <mat-card-header>
     <h1>{{promo.titre}}</h1>
   </mat-card-header>
-  <img class="avatar_promo" mat-card-image [src]="'data:image/jpeg;base64,'+ promo.avatar" alt="Photo de la promo">
+  <div>
+    <img *ngIf="!this.promo.avatar" class="avatar_promo" ng mat-card-image [src]="urlavatar" alt="Photo de la promo">
+    <img *ngIf="this.promo.avatar" class="avatar_promo" ng mat-card-image [src]="'data:image/jpeg;base64,'+ promo.avatar" alt="Photo de la promo">
+  </div>
   <mat-card-content>
     <p>
       {{ promo.description}}

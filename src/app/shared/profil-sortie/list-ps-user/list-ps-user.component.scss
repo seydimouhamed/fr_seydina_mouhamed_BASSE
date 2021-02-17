@@ -19,3 +19,30 @@ table{
     margin-left: 2%;
     border-radius: 50%;
 }
+
+.main_curseur{
+  cursor: pointer !important;
+}
+
+.visiblevide{
+  td
+  {
+    .vide{
+      display: block;
+    }
+    .action{
+      display: none;
+    }
+  }
+}
+
+.visibleaction{
+  td{
+    .vide{
+      display: none;
+    }
+    .action{
+      display: block;
+    }
+  }
+}
