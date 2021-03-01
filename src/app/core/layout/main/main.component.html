@@ -21,37 +21,37 @@
                         seydibasse@gmail.com
                 </div>
                 <div>
-                        <a mat-list-item [routerLink]= "currentProfil + '/dashboard'"  routerLinkActive='active' class="left">
+                        <a mat-list-item [routerLink]= "'admin' + '/dashboard'"  routerLinkActive='active' class="left">
                                 <mat-icon class="iconc">
                                         dashboard
                                 </mat-icon>
                                 <small *ngIf="showDetails">Dashboard</small>
                         </a>
-                        <a mat-list-item  [routerLink]= "currentProfil + '/users'"  routerLinkActive='active' class="left">
+                        <a mat-list-item  [routerLink]= "'admin' + '/users'"  routerLinkActive='active' class="left">
                                 <mat-icon class="iconc">
                                         person
                                 </mat-icon>
                                 <small *ngIf="showDetails">Utilisateurs</small>
                         </a>
-                        <a mat-list-item [routerLink]= "currentProfil + '/profilsortie'" routerLinkActive='active' class="left">
+                        <a mat-list-item [routerLink]= "'admin' + '/profilsortie'" routerLinkActive='active' class="left">
                                 <mat-icon class="iconc">
                                         school
                                 </mat-icon>
                                 <small *ngIf="showDetails">Profil Sortie</small>
                         </a>
-                        <a mat-list-item [routerLink]= "currentProfil + '/competence'" routerLinkActive='active' class="left">
+                        <a mat-list-item [routerLink]= "'admin' + '/competence'" routerLinkActive='active' class="left">
                                 <mat-icon class="iconc">
                                   assignment
                                 </mat-icon>
                                 <small *ngIf="showDetails">Compétences</small>
                         </a>
-                        <a mat-list-item [routerLink]= "currentProfil + '/grpCompetence'" routerLinkActive='active' class="left">
+                        <a mat-list-item [routerLink]= "'admin' + '/grpCompetence'" routerLinkActive='active' class="left">
                                 <mat-icon class="iconc">
                                   library_books
                                 </mat-icon>
                                 <small *ngIf="showDetails">G. Compétences</small>
                         </a>
-                        <a mat-list-item  [routerLink]= "currentProfil + '/referentiel'" routerLinkActive='active' class="left">
+                        <a mat-list-item  [routerLink]= "'admin' + '/referentiel'" routerLinkActive='active' class="left">
                                 <mat-icon class="iconc">
                                         layers
                                 </mat-icon>
@@ -63,7 +63,7 @@
                                 </mat-icon>
                                 <small *ngIf="showDetails">Briefs</small>
                         </a>
-                        <a mat-list-item [routerLink]= "currentProfil + '/promo'" routerLinkActive='active' class="left" >
+                        <a mat-list-item [routerLink]= "'admin' + '/promo'" routerLinkActive='active' class="left" >
                                 <mat-icon class="iconc">
                                         account_box
                                 </mat-icon>
@@ -154,9 +154,9 @@
             </mat-toolbar-row>
         </mat-toolbar>
         <!-- <div class="float color_green h90" > -->
-          <div class="float h90" >
+          <div class="float h90"  class=" mat-app-background">
                         <div class="float">
-                        <router-outlet></router-outlet>
+                        <router-outlet class="mat-app-background"></router-outlet>
 
                         </div>
                 </div>

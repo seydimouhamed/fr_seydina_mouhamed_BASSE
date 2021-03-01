@@ -1,8 +1,10 @@
-<br>
-<div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
-  <a mat-raised-button class="primary neutre" routerLink= './../add'>ADD NEW<mat-icon>add</mat-icon></a>
-</div>
-<br>
-<div fxLayout="row wrap" fxFlexFill fxLayoutAlign="center center">
-  <app-item *ngFor="let promo of sumPromos" fxFlex="60" [promo]="promo"></app-item>
+<div class="mat-app-background">
+  <br>
+  <div fxLayout="row"  fxLayoutGap="gappx" fxLayoutAlign="end end" fxFlexFill autosize>
+    <a mat-raised-button class="primary neutre" routerLink= './../add'>ADD NEW<mat-icon>add</mat-icon></a>
+  </div>
+  <br>
+  <div fxLayout="row wrap" fxFlexFill fxLayoutAlign="center center">
+    <app-item *ngFor="let promo of sumPromos" fxFlex="60" [promo]="promo"></app-item>
+  </div>
 </div>

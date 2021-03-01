@@ -1,3 +1,4 @@
+import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, pipe } from 'rxjs';
@@ -25,7 +26,8 @@ export class AuthService{
   private refreshTokenTimeout;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private route: Router
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
@@ -114,6 +116,7 @@ export class AuthService{
   }
 
   refreshToken(): any {
+      console.log('token rafressing');
       const refreshToken = JSON.parse(localStorage.getItem('currentUser'))['refresh_token'];
      // alert(refreshToken);
       return this.http.post<any>(`${environment.apiUrl}token/refresh`,
@@ -123,6 +126,8 @@ export class AuthService{
             // console.log(user['token']);
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserValue.token = user['token'];
+            const jwtToken = JSON.parse(atob(this.currentUserValue.token.split('.')[1]));
+            console.log(jwtToken);
               // this.currentUserSubject.next(user);
             this.startRefreshTokenTimer();
             return user;
@@ -142,6 +147,10 @@ export class AuthService{
 
   private stopRefreshTokenTimer(): void {
       clearTimeout(this.refreshTokenTimeout);
+  }
+
+  gotoHome(): void{
+    this.route.navigate(['/']);
   }
 
 }

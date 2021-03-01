@@ -1,26 +1,28 @@
-<br>
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
-  <a mat-raised-button routerLink= '/admin/profilsortie' class="primary"><mat-icon>keyboard_arrow_left</mat-icon></a>
-</div>
-<br>
-<h2 align='center'>Créer un profil de sortie</h2>
-<mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="form">
-    <form [formGroup]="form">
-      <ng-template matStepLabel>Libelle profil de sortie</ng-template>
-      <mat-form-field>
-        <mat-label>Nom profil</mat-label>
-        <input matInput placeholder="Nom profil" formControlName="libelle" required>
-      </mat-form-field>
+
+<div class="mat-app-background">
+  <br>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="gappx">
+    <a mat-raised-button routerLink= '/admin/profilsortie' class="primary"><mat-icon>keyboard_arrow_left</mat-icon></a>
+  </div>
+  <h2 align='center'>Créer un profil de sortie</h2>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Libelle profil de sortie</ng-template>
+        <mat-form-field>
+          <mat-label>Nom profil</mat-label>
+          <input matInput placeholder="Nom profil" formControlName="libelle" required>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step  label="Affecter ce profils de sortie à des apprenants">
       <div>
-        <button mat-raised-button color="primary" matStepperNext>Suivant</button>
+        <button mat-raised-button color="primary"  matStepperPrevious>Retour</button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step  label="Affecter ce profils de sortie à des apprenants">
-    <div>
-      <button mat-raised-button color="primary"  matStepperPrevious>Retour</button>
-    </div>
-      <app-dndapprenant [apprenant$]="listApprenant" (emitApprenants)="onValidate($event)"></app-dndapprenant>
-  </mat-step>
-</mat-horizontal-stepper>
+        <app-dndapprenant [apprenant$]="listApprenant" (emitApprenants)="onValidate($event)"></app-dndapprenant>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

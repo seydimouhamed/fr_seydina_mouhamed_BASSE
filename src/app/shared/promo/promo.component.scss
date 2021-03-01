@@ -11,7 +11,7 @@
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: white;
+  background-color: whitesmoke;
   border-radius: 5px;
 }
 
@@ -21,7 +21,9 @@
   // background-color: #338F83;
   background-color: #ff7713;
 }
-
+.custom_primary{
+  color: #ff7713;
+}
 .m_l_4_t_m{
   margin-top: -50px;
   margin-left: 4%;

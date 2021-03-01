@@ -15,7 +15,7 @@ export class CreateUserComponent implements OnInit {
   hide = false;
   busy = false;
   updateUser = false;
-  avatarUser = '../assets/iconProfils/cm.png';
+  avatarUser = '../assets/iconProfils/formateur.png';
 
   @Input() userdata: User;
   constructor(

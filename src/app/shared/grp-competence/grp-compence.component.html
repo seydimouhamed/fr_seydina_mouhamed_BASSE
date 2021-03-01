@@ -1,20 +1,20 @@
-<div class="header-user">
-  <div fxLayout="row" fxFill fxLayoutAlign="space-between center" class="p-30 " fxLayoutGap="gappx">
-    <div><p>
-          <mat-form-field fxFill appearance="outline" >
-            <mat-icon matSuffix>search</mat-icon>
-            <mat-label>Recherche</mat-label>
-            <input matInput placeholder="Recherche groupes de competences">
-          </mat-form-field>
-        </p>
+<div class="mat-app-background">
+  <div class="header-user">
+    <div fxLayout="row" fxFill fxLayoutAlign="space-between center" class="p-30 " fxLayoutGap="gappx">
+      <div><p>
+            <mat-form-field fxFill appearance="outline" >
+              <mat-icon matSuffix>search</mat-icon>
+              <mat-label>Recherche</mat-label>
+              <input matInput placeholder="Recherche groupes de competences">
+            </mat-form-field>
+          </p>
+      </div>
+      <div ><h1 class="ft-white ">Groupes de compétences</h1></div>
+      <div>&nbsp;</div>
     </div>
-    <div ><h1 class="ft-white ">Groupes de compétences</h1></div>
-    <div>&nbsp;</div>
   </div>
-</div>
 
-<div class=" w_92 m_l_4_t_m mat-elevation-z3">
-        <router-outlet></router-outlet>
-
-
+  <div class=" w_92 m_l_4_t_m mat-elevation-z3" >
+          <router-outlet class="mat-app-background"></router-outlet>
+  </div>
 </div>
